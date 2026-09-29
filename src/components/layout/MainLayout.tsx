@@ -1,6 +1,7 @@
 import { Sidebar } from "./Sidebar";
 import { Header } from "./Header";
 import { useState } from "react";
+import { ProductPage } from "../../features/product/page/ProductPage";
 
 export const MainLayout = () => {
 
@@ -37,8 +38,8 @@ export const MainLayout = () => {
                 )
             }
 
-                <div className="h-screen w-full flex justify-center items-center bg-gray-300">
-                    contenu
+                <div className="h-screen w-full flex justify-center items-center bg-gray-300 p-2">
+                    Contenu
                 </div>
 
             </main>

@@ -78,7 +78,7 @@ export const Sidebar = () => {
 
             <div className="mt-auto bottom-0 flex px-4 mb-8">
                 <button className="rounded-md p-2 shadow-md w-full">
-                    déconnexion
+                    Deconnexion
                 </button>
             </div>
         </div>
