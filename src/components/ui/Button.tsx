@@ -18,10 +18,10 @@ export const ButtonGlobal = ({variant, size, content}: ButtonProps) => {
     }
 
     const variantClasses = {
-        primary: "bg-primary",
-        secondary: "bg-secondary",
-        tertiary: "bg-tertiary",
-        neutral: "bg-neutral",
+        primary: "bg-primary text-white",
+        secondary: "bg-secondary text-white",
+        tertiary: "bg-tertiary text-white",
+        neutral: "bg-neutral text white",
     };
 
     return (
