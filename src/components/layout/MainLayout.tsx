@@ -4,7 +4,7 @@ import { useState } from "react";
 
 export const MainLayout = () => {
 
-    const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     return (
         <div className="min-h-screen w-full grid grid-cols-1 md:grid-cols-5">
@@ -16,16 +16,16 @@ export const MainLayout = () => {
             <main className="col-span-4 min-w-0">
 
                 <Header 
-                    onMenuClick={() => setSidebarOpen(true)}
+                    onMenuClick={() => setIsSidebarOpen(true)}
                 />
 
             {/* mobile sidebar*/}
             {
-                sidebarOpen && (
+                isSidebarOpen && (
                     <aside className="fixed inset-0 z-50 bg-black/40 md:hidden">
                         <div className="h-full w-64 bg-white">
                             <button
-                                onClick={() => setSidebarOpen(false)}
+                                onClick={() => setIsSidebarOpen(false)}
                                 className="p-4"
                             >
                                 ✕
