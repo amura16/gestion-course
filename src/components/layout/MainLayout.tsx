@@ -1,7 +1,6 @@
 import { Sidebar } from "./Sidebar";
 import { Header } from "./Header";
 import { useState } from "react";
-import { ProductPage } from "../../features/product/page/ProductPage";
 
 export const MainLayout = () => {
 
