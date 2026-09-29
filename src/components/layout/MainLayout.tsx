@@ -9,7 +9,7 @@ export const MainLayout = () => {
     return (
         <div className="min-h-screen w-full grid grid-cols-1 md:grid-cols-5">
 
-            <aside className="hidden sm:block md:col-span-1">
+            <aside className="hidden md:block md:col-span-1">
                 <Sidebar />
             </aside>
 
@@ -34,7 +34,7 @@ export const MainLayout = () => {
                             <Sidebar />
                         </div>
                     </aside>
-                    )
+                )
             }
 
                 <div className="h-screen w-full flex justify-center items-center bg-gray-300">

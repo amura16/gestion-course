@@ -34,7 +34,7 @@ const navigations = [
 
 export const Sidebar = () => {
     return (
-        <div className="h-full w-full">
+        <div className="h-full w-full flex flex-col">
             <div className="h-18 w-full flex justify-between items-center gap-4 px-4 shadow-md">
                 <img src={Logo} alt="logo" className="w-12 h-10"/>
 
@@ -64,6 +64,7 @@ export const Sidebar = () => {
                             navigations.map((nav) => {
                                 return (
                                 <li 
+                                    key={nav.path}
                                     className="my-3"
                                 >
                                     <a href={nav.path}>{nav.name}</a>
@@ -73,6 +74,12 @@ export const Sidebar = () => {
                         }
                     </ul>
                 </div>
+            </div>
+
+            <div className="mt-auto bottom-0 flex px-4 mb-8">
+                <button className="rounded-md p-2 shadow-md w-full">
+                    déconnexion
+                </button>
             </div>
         </div>
     )
