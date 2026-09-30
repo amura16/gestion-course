@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom"
 import Logo from "../../assets/logo.png"
 import { ButtonGlobal } from "../ui/Button"
-import { LayoutDashboard, ClipboardList, Truck, Handshake, Car, History, Package, Icon} from "lucide-react";
+import { LayoutDashboard, ClipboardList, Truck, Handshake, Car, History, Package} from "lucide-react";
 
 const navigations = [
     {
