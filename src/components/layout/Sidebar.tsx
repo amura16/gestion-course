@@ -1,45 +1,49 @@
-import { NavLink } from "react-router-dom"
+import { NavLink } from "react-router"
 import Logo from "../../assets/logo.png"
 import { ButtonGlobal } from "../ui/Button"
 import { LayoutDashboard, ClipboardList, Truck, Handshake, Car, History, Package} from "lucide-react";
 
-const navigations = [
-    {
-        path: "ensemble",
-        name: "Vue d'ensemble",
-        icon: LayoutDashboard
-    },
-    {
-        path: "demande",
-        name: "Mes demandes",
-        icon: ClipboardList
-    },
-    {
-        path: "course",
-        name: "Courses en cours",
-        icon: Truck
-    },
-    {
-        path: "offre",
-        name: "Offres & Comparateur",
-        icon: Handshake
-    },
-    {
-        path: "véhicule",
-        name: "Véhicules",
-        icon: Car
-    },
-    {
-        path: "historique",
-        name: "Historique & factures",
-        icon: History
-    },
-    {
-        path: "produit",
-        name: "Produits",
-        icon: Package
-    }
-];
+const navigations = {
+    client: [
+        {
+            path: "ensemble",
+            name: "Vue d'ensemble",
+            icon: LayoutDashboard
+        },
+        {
+            path: "demande",
+            name: "Mes demandes",
+            icon: ClipboardList
+        },
+        {
+            path: "course",
+            name: "Courses en cours",
+            icon: Truck
+        },
+        {
+            path: "offre",
+            name: "Offres & Comparateur",
+            icon: Handshake
+        },
+        {
+            path: "véhicule",
+            name: "Véhicules",
+            icon: Car
+        },
+        {
+            path: "historique",
+            name: "Historique & factures",
+            icon: History
+        },
+        {
+            path: "produit",
+            name: "Produits",
+            icon: Package
+        }
+    ],
+    carrier: [],
+    admin: []
+};
 
 export const Sidebar = () => {
     return (
@@ -76,7 +80,7 @@ export const Sidebar = () => {
 
                 <div className="flex justify-center mt-2 ps-0 lg:ps-10">
                     <div className="w-full">
-                        {navigations.map((nav) => {
+                        {navigations.client.map((nav) => {
                             const Icon = nav.icon;
 
                             return (

@@ -39,9 +39,13 @@ export function AuthProvider({
     // Verifie si l'utilisateur est déjà connecter
     useEffect(() => {
         const loadUser = async () => {
+            console.log("1 - loadUser démarre");
             try {
+
+                console.log("2 - appel getCurrentUser")
                 const currentUser = await getCurrentUser();
 
+                console.log("3 - utilisateur récupéré", currentUser);
                 setUser(currentUser);
             } catch {
                 setUser(null);

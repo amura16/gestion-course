@@ -5,6 +5,8 @@ import {
 
 import { HomePage } from "@/app/HomePage";
 import { LoginPage } from "@/features/auth/pages/LoginPage";
+import { ProductPage } from "@/features/product/page/ProductPage";
+import { MainLayout } from "../components/layout/MainLayout";
 
 export const router = createBrowserRouter([
     {
@@ -19,4 +21,14 @@ export const router = createBrowserRouter([
         path: "*",
         element: <Navigate to="/" replace />,
     },
+    {
+        path: "/client",
+        Component: MainLayout,
+        children: [
+            {
+                path: "produit",
+                Component: ProductPage
+            }
+        ]
+    }
 ]);
