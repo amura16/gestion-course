@@ -15,10 +15,10 @@ export const Header = ({onMenuClick}: HeaderProps ) => {
     return (
         <header className="fixed top-0 right-0 z-50 h-18 w-full md:w-[80%] flex items-center shadow-md bg-white py-2 px-4 gap-2 flex justify-between">
 
-            <div className="hidden sm:flex bg-gray-300 rounded-lg p-1 w-60 shadow-lg">
+            <div className="hidden sm:flex bg-gray-200 rounded-lg w-60 shadow-lg items-center">
                 <Toogle
                     content={
-                        <p className="text-center">
+                        <p className="text-center text-sm">
                             ESPACE <br />
                             CLIENT
                         </p>
@@ -29,7 +29,7 @@ export const Header = ({onMenuClick}: HeaderProps ) => {
 
                 <Toogle
                     content={
-                        <p className="text-center">
+                        <p className="text-center text-sm">
                             ESPACE <br />
                             TRANSPORT
                         </p>
