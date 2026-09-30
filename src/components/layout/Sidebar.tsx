@@ -1,38 +1,45 @@
 import { NavLink } from "react-router-dom"
 import Logo from "../../assets/logo.png"
 import { ButtonGlobal } from "../ui/Button"
-
+import { LayoutDashboard, ClipboardList, Truck, Handshake, Car, History, Package, Icon} from "lucide-react";
 
 const navigations = [
     {
         path: "ensemble",
-        name: "Vue d'ensemble"
+        name: "Vue d'ensemble",
+        icon: LayoutDashboard
     },
     {
         path: "demande",
-        name: "Mes demandes"
+        name: "Mes demandes",
+        icon: ClipboardList
     },
     {
         path: "course",
-        name: "Courses en cours"
+        name: "Courses en cours",
+        icon: Truck
     },
     {
         path: "offre",
-        name: "Offres & Comparateur"
+        name: "Offres & Comparateur",
+        icon: Handshake
     },
     {
         path: "véhicule",
-        name: "Véhicules"
+        name: "Véhicules",
+        icon: Car
     },
     {
         path: "historique",
-        name: "Historique & factures"
+        name: "Historique & factures",
+        icon: History
     },
     {
         path: "product",
-        name: "Produits"
+        name: "Produits",
+        icon: Package
     }
-]
+];
 
 export const Sidebar = () => {
     return (
@@ -69,21 +76,20 @@ export const Sidebar = () => {
 
                 <div className="flex justify-center mt-2 ps-0 lg:ps-10">
                     <div className="w-full">
-                        {navigations.map((nav) => (
-                            <NavLink
-                                key={nav.path}
-                                className={({ isActive }) =>
-                                    `block my-3 p-2 ${
-                                        isActive
-                                            ? "bg-white rounded-md"
-                                            : ""
-                                    }`
-                                }
-                                to={nav.path}
-                            >
-                                {nav.name}
-                            </NavLink>
-                        ))}
+                        {navigations.map((nav) => {
+                            const Icon = nav.icon;
+
+                            return (
+                                <NavLink
+                                    key={nav.path}
+                                    className={({ isActive }) => `flex gap-3 items-center my-3 p-2 ${isActive? "bg-white rounded-md": ""}`}
+                                    to={nav.path}
+                                >
+                                    <Icon size={20} />
+                                    <span>{nav.name}</span>
+                                </NavLink>
+                            )
+                        })}
                     </div>
                 </div>
             </div>

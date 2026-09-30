@@ -2,6 +2,7 @@ import { useState } from "react"
 import Burger from "../../assets/burger-bar.png"
 import { Input } from "../ui/Input"
 import { Toogle } from "../ui/Toogle"
+import { Search } from "lucide-react"
 
 interface HeaderProps {
     onMenuClick: () => void
@@ -41,6 +42,7 @@ export const Header = ({onMenuClick}: HeaderProps ) => {
             {/* search bar */}
             <div className="w-75 border rounded-lg shadow-lg">
                 <Input 
+                    leftContent={<Search size={18} />}
                     placeholder="Rechercher"
                 />
             </div>
