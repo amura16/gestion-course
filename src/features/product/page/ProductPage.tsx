@@ -1,30 +1,30 @@
 import { useState } from "react";
-import { Card } from "../../../components/ui/Card";
+
+import { ProductForm } from "../components/ProductForm";
+import { ProductList } from "../components/ProductList";
+import { ProductTabs } from "../components/ProductTabs";
 
 export const ProductPage = () => {
-
-    const [isActive, setIsActive] = useState<"produits" | "courses">("produits");
+    const [isActive, setIsActive] = useState<"produits" | "creer">(
+        "produits"
+    );
 
     return (
         <div className="w-full min-h-full p-4">
-            <div className="w-full flex gap-4 bg-gray-200 p-2 rounded-lg">
-                <Card 
-                    content="Produits" 
-                    isActive={"produits" === isActive} 
-                    onClick={() => setIsActive("produits")}
-                />
-
-                <Card 
-                    content="Courses" 
-                    isActive={"courses" === isActive} 
-                    onClick={() => setIsActive("courses")}
-                />
-            </div>
+            <ProductTabs
+                activeTab={isActive}
+                onChange={setIsActive}
+            />
 
             <div className="w-full mt-4">
+                {isActive === "produits" && <ProductList />}
 
+                {isActive === "creer" && (
+                    <ProductForm
+                        onCreated={() => setIsActive("produits")}
+                    />
+                )}
             </div>
         </div>
     );
 };
-
