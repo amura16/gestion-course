@@ -16,13 +16,23 @@ export const Header = ({onMenuClick}: HeaderProps ) => {
 
             <div className="hidden sm:flex bg-gray-300 rounded-lg p-1 w-60 shadow-lg">
                 <Toogle
-                    content="ESPACE CLIENT"
+                    content={
+                        <p className="text-center">
+                            ESPACE <br />
+                            CLIENT
+                        </p>
+                    }
                     isActive={"client" === espaceActive}
                     onClick={() => setEspaceActive("client")}
                 />
 
                 <Toogle
-                    content="ESPACE TRANSPORT"
+                    content={
+                        <p className="text-center">
+                            ESPACE <br />
+                            TRANSPORT
+                        </p>
+                    }
                     isActive={"transporteur" === espaceActive}
                     onClick={() => setEspaceActive("transporteur")}
                 />

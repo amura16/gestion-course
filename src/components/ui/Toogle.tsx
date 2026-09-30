@@ -1,5 +1,7 @@
+import React from "react";
+
 interface ToogleProps {
-    content: string;
+    content: React.ReactNode;
     size?: string;
     onClick?: () => void;
     isActive?: boolean;

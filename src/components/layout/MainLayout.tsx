@@ -1,6 +1,7 @@
 import { Sidebar } from "./Sidebar";
 import { Header } from "./Header";
 import { useState } from "react";
+import { Outlet } from "react-router-dom";
 
 export const MainLayout = () => {
 
@@ -19,26 +20,26 @@ export const MainLayout = () => {
                     onMenuClick={() => setIsSidebarOpen(true)}
                 />
 
-            {/* mobile sidebar*/}
-            {
-                isSidebarOpen && (
-                    <aside className="fixed inset-0 z-50 bg-black/40 md:hidden">
-                        <div className="h-full w-64 bg-white">
-                            <button
-                                onClick={() => setIsSidebarOpen(false)}
-                                className="p-4"
-                            >
-                                ✕
-                            </button>
+                {/* mobile sidebar*/}
+                {
+                    isSidebarOpen && (
+                        <aside className="fixed inset-0 z-50 bg-black/40 md:hidden">
+                            <div className="h-full w-64 bg-white">
+                                <button
+                                    onClick={() => setIsSidebarOpen(false)}
+                                    className="p-4"
+                                >
+                                    ✕
+                                </button>
 
-                            <Sidebar />
-                        </div>
-                    </aside>
-                )
-            }
+                                <Sidebar />
+                            </div>
+                        </aside>
+                    )
+                }
 
-                <div className="h-screen w-full flex justify-center items-center bg-gray-300 p-2">
-                    Contenu
+                <div className="min-h-screen w-full bg-gray-200 p-4 py-25">
+                    <Outlet />
                 </div>
 
             </main>

@@ -1,11 +1,11 @@
 interface CardProps {
-    content: string
+    content: string;
 }
 
-export const Card = ({content}: CardProps) => {
+export const Card = ({ content }: CardProps) => {
     return (
-        <div className="rounded-md flex justify-center items-center">
+        <div className="w-50 h-15 bg-white rounded-md shadow-md flex justify-center items-center">
             {content}
         </div>
-    )
-}
+    );
+};
