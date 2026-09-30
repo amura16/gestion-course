@@ -1,12 +1,6 @@
-import {
-    createProduct as createProductApi,
-    getProducts as getProductsApi,
-} from "../api/product.api";
+import {createProduct as createProductApi, getProducts as getProductsApi} from "../api/product.api";
 
-import type {
-    CreateProductData,
-    Product,
-} from "../types/product.types";
+import type {CreateProductData, Product} from "../types/product.types";
 
 export async function getProducts(): Promise<Product[]> {
     try {

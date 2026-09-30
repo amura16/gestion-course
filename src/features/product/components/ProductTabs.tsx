@@ -3,10 +3,7 @@ interface ProductTabsProps {
     onChange: (tab: "produits" | "creer") => void;
 }
 
-export const ProductTabs = ({
-    activeTab,
-    onChange,
-}: ProductTabsProps) => {
+export const ProductTabs = ({activeTab,onChange}: ProductTabsProps) => {
     return (
         <div className="w-full flex gap-4 bg-gray-200 p-2 rounded-lg">
             <button

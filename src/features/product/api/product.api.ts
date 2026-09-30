@@ -19,9 +19,7 @@ export async function getProducts(): Promise<Product[]> {
     return result.data;
 }
 
-export async function createProduct(
-    data: CreateProductData
-): Promise<Product> {
+export async function createProduct(data: CreateProductData): Promise<Product> {
     const response = await fetch(`${import.meta.env.VITE_API_URL}/product`, {
         method: "POST",
         headers: {

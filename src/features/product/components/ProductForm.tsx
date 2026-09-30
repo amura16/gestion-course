@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react";
+import { useState } from "react";
 import { createProduct } from "../services/product.service";
 import type { CreateProductData } from "../types/product.types";
 
@@ -20,9 +20,7 @@ export const ProductForm = ({ onCreated }: ProductFormProps) => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    function handleChange(
-        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-    ) {
+    function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
         const { name, value } = e.target;
 
         setFormData((previous) => ({
@@ -33,11 +31,11 @@ export const ProductForm = ({ onCreated }: ProductFormProps) => {
                 name === "largeur" ||
                 name === "hauteur"
                     ? Number(value)
-                    : value,
+                    : value
         }));
     }
 
-    async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    async function handleSubmit(e: React.SyntheticEvent) {
         e.preventDefault();
 
         setError(null);
@@ -110,7 +108,7 @@ export const ProductForm = ({ onCreated }: ProductFormProps) => {
                         value={formData.poids}
                         onChange={handleChange}
                         min="0"
-                        step="5"
+                        step="0.01"
                         required
                         className="w-full border rounded-md p-2 outline-none focus:ring-2 focus:ring-blue-500"
                     />
@@ -143,7 +141,7 @@ export const ProductForm = ({ onCreated }: ProductFormProps) => {
                         value={formData.longueur}
                         onChange={handleChange}
                         min="0"
-                        step="5"
+                        step="0.01"
                         required
                         className="w-full border rounded-md p-2 outline-none focus:ring-2 focus:ring-blue-500"
                     />
@@ -160,7 +158,7 @@ export const ProductForm = ({ onCreated }: ProductFormProps) => {
                         value={formData.largeur}
                         onChange={handleChange}
                         min="0"
-                        step="5"
+                        step="0.01"
                         required
                         className="w-full border rounded-md p-2 outline-none focus:ring-2 focus:ring-blue-500"
                     />
@@ -177,7 +175,7 @@ export const ProductForm = ({ onCreated }: ProductFormProps) => {
                         value={formData.hauteur}
                         onChange={handleChange}
                         min="0"
-                        step="5"
+                        step="0.01"
                         required
                         className="w-full border rounded-md p-2 outline-none focus:ring-2 focus:ring-blue-500"
                     />
@@ -188,14 +186,18 @@ export const ProductForm = ({ onCreated }: ProductFormProps) => {
                         Status
                     </label>
 
-                    <input
-                        type="text"
+                    <select
                         name="status"
                         value={formData.status}
                         onChange={handleChange}
                         required
                         className="w-full border rounded-md p-2 outline-none focus:ring-2 focus:ring-blue-500"
-                    />
+                    >
+                        <option value="">Sélectionner un status</option>
+                        <option value="IN_STOCK">En stock</option>
+                        <option value="SHIPPED">Expédié</option>
+                        <option value="DELIVERED">Livré</option>
+                    </select>
                 </div>
             </div>
 
