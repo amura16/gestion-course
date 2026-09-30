@@ -6,7 +6,7 @@ interface CardProps {
 
 export const Card = ({ content, isActive, onClick}: CardProps) => {
 
-    const activated = `${isActive?"bg-secondary": "bg-white"}`
+    const activated = `${isActive?"bg-gray-100": "bg-white"}`
 
     return (
         <div 

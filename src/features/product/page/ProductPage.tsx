@@ -7,7 +7,7 @@ export const ProductPage = () => {
 
     return (
         <div className="w-full min-h-full p-4">
-            <div className="w-full flex gap-4">
+            <div className="w-full flex gap-4 bg-gray-200 p-2 rounded-lg">
                 <Card 
                     content="Produits" 
                     isActive={"produits" === isActive} 

@@ -38,7 +38,7 @@ export const MainLayout = () => {
                     )
                 }
 
-                <div className="flex-1 min-h-screen overflow-y-auto bg-gray-300 pt-18">
+                <div className="flex-1 min-h-screen overflow-y-auto pt-18">
                     <Outlet />
                 </div>
 
