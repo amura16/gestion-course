@@ -11,7 +11,7 @@ export const App = () => {
                 <Route path="/client" element={<MainLayout />}>
 
                     <Route
-                        path="product"
+                        path="produit"
                         element={<ProductPage />}
                     />
 

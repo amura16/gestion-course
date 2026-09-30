@@ -35,7 +35,7 @@ const navigations = [
         icon: History
     },
     {
-        path: "product",
+        path: "produit",
         name: "Produits",
         icon: Package
     }
