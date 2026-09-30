@@ -67,7 +67,7 @@ export const Sidebar = () => {
                     NAVIGATION
                 </p>
 
-                <div className="flex justify-center mt-2">
+                <div className="flex justify-center mt-2 ps-0 lg:ps-10">
                     <div className="w-full">
                         {navigations.map((nav) => (
                             <NavLink

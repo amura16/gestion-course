@@ -14,7 +14,7 @@ export const MainLayout = () => {
                 <Sidebar />
             </aside>
 
-            <main className="col-span-4 min-w-0">
+            <main className="col-span-4 min-w-0 shrink-0">
 
                 <Header 
                     onMenuClick={() => setIsSidebarOpen(true)}
@@ -38,7 +38,7 @@ export const MainLayout = () => {
                     )
                 }
 
-                <div className="min-h-screen w-full bg-gray-200 p-4 py-25">
+                <div className="flex-1 min-h-screen overflow-y-auto bg-gray-300 pt-18">
                     <Outlet />
                 </div>
 
