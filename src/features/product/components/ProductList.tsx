@@ -1,4 +1,5 @@
 import { useProduit } from "../hooks/useGetProduct";
+import type { Product } from "../types/product.types";
 
 export const ProductList = () => {
 
@@ -26,7 +27,7 @@ export const ProductList = () => {
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {data.map((product) => (
+            {data.map((product: Product) => (
                 <div
                     key={product.id}
                     className="bg-white rounded-lg shadow-md p-5"
