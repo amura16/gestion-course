@@ -3,13 +3,15 @@ import Burger from "../../assets/burger-bar.png"
 import { Input } from "../ui/Input"
 import { Toogle } from "../ui/Toogle"
 import { Search } from "lucide-react"
-import { useAuth } from "@/features/auth/providers/AuthProviders"
+import { useAuthStore } from "@/features/auth/store/useAuthStore"
 
 interface HeaderProps {
     onMenuClick: () => void
 }
 
 export const Header = ({onMenuClick}: HeaderProps ) => {
+
+    const user = useAuthStore((state) => (state.user));
 
     const [espaceActive, setEspaceActive] = useState<"client" | "carrier">("client");
 
