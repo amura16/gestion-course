@@ -3,7 +3,7 @@ import Burger from "../../assets/burger-bar.png"
 import { Input } from "../ui/Input"
 import { Toogle } from "../ui/Toogle"
 import { Search } from "lucide-react"
-import { useAuth } from "@/features/auth/providers/AuthProviders"
+import { useAuthStore } from "@/features/auth/store/useAuthStore"
 
 interface HeaderProps {
     onMenuClick: () => void
@@ -11,12 +11,15 @@ interface HeaderProps {
 
 export const Header = ({onMenuClick}: HeaderProps ) => {
 
+    const user = useAuthStore((state) => (state.user));
+
+    const isLoading = useAuthStore((state) => (state.isLoading));
+
+    console.log("isLoading", isLoading)
+
     const [espaceActive, setEspaceActive] = useState<"client" | "carrier">("client");
 
-    const {user, isLoading} = useAuth();
-
     console.log("header", user);
-    console.log("header", isLoading);
 
 
     return (
@@ -63,7 +66,7 @@ export const Header = ({onMenuClick}: HeaderProps ) => {
             </button>
 
             <div className="shadow-lg rounded-lg h-full w-64 hidden md:flex items-center justify-center">
-                {user?.nom}
+                {isLoading?"chargement...": user?.nom}
             </div>
 
         </header>

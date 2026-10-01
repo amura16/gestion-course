@@ -1,10 +1,11 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useAuth } from "../providers/AuthProviders";
 import { loginSchema, type LoginFormData } from "../schemas/login.schema";
+import { useAuthStore } from "../store/useAuthStore";
 
 export const LoginForm = () => {
-    const { login } = useAuth();
+
+    const login = useAuthStore((state) => state.login);
 
     const {
         register,
@@ -22,7 +23,7 @@ export const LoginForm = () => {
         try {
             await login(data);
         } catch {
-            // Erreur globale (identifiants incorrects)
+            // Erreur globale
             setError("root", {
                 message: "Identifiants incorrects.",
             });

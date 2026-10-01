@@ -1,20 +1,17 @@
 import { Navigate } from "react-router";
-
-import { LoginForm } from "@/features/auth/components/LoginForm.old";
-import { useAuth } from "../providers/AuthProviders";
+import { LoginForm } from "../components/LoginFrom";
+import { useAuthStore } from "../store/useAuthStore";
 
 export function LoginPage() {
-    const {
-        isAuthenticated,
-        isLoading,
-    } = useAuth();
+    const isLoading = useAuthStore((state) => (state.isLoading));
+    const isAuthenticated = useAuthStore((state) => (state.isAuthenticated));
 
     if (isLoading) {
         return <p>Chargement...</p>;
     }
 
     if (isAuthenticated) {
-        return <Navigate to="/" replace />;
+        return <Navigate to="/client/produit" replace />;
     }
 
     return (
