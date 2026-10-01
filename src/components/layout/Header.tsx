@@ -15,12 +15,6 @@ export const Header = ({onMenuClick}: HeaderProps ) => {
 
     const [espaceActive, setEspaceActive] = useState<"client" | "carrier">("client");
 
-    const {user, isLoading} = useAuth();
-
-    console.log("header", user);
-    console.log("header", isLoading);
-
-
     return (
         <header className="fixed top-0 right-0 z-50 h-18 w-full md:w-[80%] flex items-center shadow-md bg-white py-2 px-4 gap-2 flex justify-between">
 

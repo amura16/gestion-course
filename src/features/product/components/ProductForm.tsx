@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { createProduct } from "../services/product.service";
 import type { CreateProductData } from "../types/product.types";
+import { useCreateProduct } from "../hooks/useCreateProduct";
 
 interface ProductFormProps {
     onCreated?: () => void;
@@ -17,8 +17,7 @@ export const ProductForm = ({ onCreated }: ProductFormProps) => {
         status: ""
     });
 
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
+    const createProduct = useCreateProduct();
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
         const { name, value } = e.target;
@@ -35,36 +34,28 @@ export const ProductForm = ({ onCreated }: ProductFormProps) => {
         }));
     }
 
-    async function handleSubmit(e: React.SyntheticEvent) {
+    function handleSubmit(e: React.SyntheticEvent) {
         e.preventDefault();
 
-        setError(null);
-        setIsLoading(true);
+        createProduct.mutate(formData, {
+            onSuccess: () => {
+                setFormData({
+                    description: "",
+                    poids: 0,
+                    longueur: 0,
+                    largeur: 0,
+                    hauteur: 0,
+                    origine: "",
+                    status: ""
+                });
 
-        try {
-            await createProduct(formData);
-
-            setFormData({
-                description: "",
-                poids: 0,
-                longueur: 0,
-                largeur: 0,
-                hauteur: 0,
-                origine: "",
-                status: ""
-            });
-
-            onCreated?.();
-        } catch (error) {
-            setError(
-                error instanceof Error
-                    ? error.message
-                    : "Une erreur est survenue"
-            );
-        } finally {
-            setIsLoading(false);
-        }
+            }
+        })
     }
+
+    const isLoading = createProduct.isPending;
+    const error = createProduct.error;
+    
 
     return (
         <form
@@ -77,7 +68,7 @@ export const ProductForm = ({ onCreated }: ProductFormProps) => {
 
             {error && (
                 <div className="p-3 bg-red-100 text-red-700 rounded-md">
-                    {error}
+                    {error.message}
                 </div>
             )}
 
