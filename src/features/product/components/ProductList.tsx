@@ -1,50 +1,22 @@
-import { useEffect, useState } from "react";
-import { getProducts } from "../api/product.api";
-import type { Product } from "../types/product.types";
+import { useProduit } from "../hooks/useGetProduct";
 
 export const ProductList = () => {
-    const [products, setProducts] = useState<Product[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
 
-    async function loadProducts() {
-        try {
-            setIsLoading(true);
-            setError(null);
+    const { data, isPending, isError, error } = useProduit();
 
-            const data = await getProducts();
-
-            console.log(data);
-
-            setProducts(data);
-        } catch (error) {
-            setError(
-                error instanceof Error
-                    ? error.message
-                    : "Impossible de récupérer les produits"
-            );
-        } finally {
-            setIsLoading(false);
-        }
-    }
-
-    useEffect(() => {
-        void loadProducts();
-    }, []);
-
-    if (isLoading) {
+    if (isPending) {
         return <p>Chargement des produits...</p>;
     }
 
-    if (error) {
+    if (isError) {
         return (
             <div className="p-4 bg-red-100 text-red-700 rounded-md">
-                {error}
+                {error.message}
             </div>
         );
     }
 
-    if (products.length === 0) {
+    if (data.length === 0) {
         return (
             <div className="p-6 bg-white rounded-lg text-gray-500">
                 Aucun produit trouvé.
@@ -54,7 +26,7 @@ export const ProductList = () => {
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {products.map((product) => (
+            {data.map((product) => (
                 <div
                     key={product.id}
                     className="bg-white rounded-lg shadow-md p-5"
