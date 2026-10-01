@@ -28,24 +28,17 @@ const AuthContext = createContext<AuthContextValue | undefined>(
     undefined,
 );
 
-export function AuthProvider({
-    children,
-}: {
-    children: React.ReactNode;
-}) {
+export function AuthProvider({children}: {children: React.ReactNode}) {
     const [user, setUser] = useState<User | null>(null);
     const [isLoading, setIsLoading] = useState(true);
 
     // Verifie si l'utilisateur est déjà connecter
     useEffect(() => {
         const loadUser = async () => {
-            console.log("1 - loadUser démarre");
             try {
 
-                console.log("2 - appel getCurrentUser")
                 const currentUser = await getCurrentUser();
 
-                console.log("3 - utilisateur récupéré", currentUser);
                 setUser(currentUser);
             } catch {
                 setUser(null);

@@ -14,6 +14,8 @@ export const ProductList = () => {
 
             const data = await getProducts();
 
+            console.log(data);
+
             setProducts(data);
         } catch (error) {
             setError(

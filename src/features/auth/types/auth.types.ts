@@ -1,7 +1,11 @@
 export interface User {
     id: number;
-    name: string;
+    nom: string;
+    prenom: string;
+    phone: string;
+    role: string;
     email: string;
+    createdAt: Date;
 }
 
 export interface LoginCredentials {

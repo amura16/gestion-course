@@ -11,7 +11,7 @@ import { MainLayout } from "../components/layout/MainLayout";
 export const router = createBrowserRouter([
     {
         path: "/",
-        Component: HomePage,
+        Component: MainLayout,
     },
     {
         path: "/login",

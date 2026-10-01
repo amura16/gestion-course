@@ -16,11 +16,13 @@ export const login = async (credentials: LoginCredentials): Promise<User> => {
 }
 
 export const getCurrentUser = async () : Promise<User> =>  {
-    const response = await api.get<User>("/auth/me");
+    const response = await api.get<User>("/user/me");
+
+    console.log("getcurrent", response.data)
 
     return response.data;
 }
 
 export const logout = async () : Promise<void> => {
-    await api.post("/auth/logout");
+    await api.post("/user/logout");
 }

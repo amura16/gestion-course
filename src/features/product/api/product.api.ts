@@ -1,43 +1,26 @@
+import { api } from "@/lib/axios";
 import type { CreateProductData, Product } from "../types/product.types";
 
-interface GetProductsResponse {
-    data: Product[];
-}
-
 export async function getProducts(): Promise<Product[]> {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/product/client`, {
-        method: "GET",
-        credentials: "include",
-    });
 
-    if (!response.ok) {
+    const response = await api.get<Product[]>("/product/client");
+
+    if (!response.data) {
         throw new Error("Impossible de récupérer les produits");
     }
 
-    const result: GetProductsResponse = await response.json();
-
-    return result.data;
+    return response.data;
 }
 
 export async function createProduct(data: CreateProductData): Promise<Product> {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/product`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify(data),
-    });
 
-    if (!response.ok) {
-        const error = await response.json().catch(() => null);
+    const response = await api.post("/product", data);
 
-        throw new Error(
-            error?.message ?? "Impossible de créer le produit"
-        );
+    if (!response.data) {
+        throw new Error("Impossible de créer le produit");
     }
 
     console.log(response);
 
-    return response.json();
+    return response.data;
 }

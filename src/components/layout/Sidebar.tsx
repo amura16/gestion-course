@@ -100,7 +100,7 @@ export const Sidebar = () => {
 
             {/* Déconnexion */}
             <div className="shrink-0 px-4 mb-8">
-                <button className="rounded-md p-2 shadow-md w-full">
+                <button className="rounded-md p-2 shadow-md w-full" >
                     Déconnexion
                 </button>
             </div>
