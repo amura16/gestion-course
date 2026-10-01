@@ -1,9 +1,11 @@
+export type Role = "CLIENT" | "CARRIER" | "ADMIN"
+
 export interface User {
     id: number;
     nom: string;
     prenom: string;
     phone: string;
-    role: string;
+    role: Role;
     email: string;
     createdAt: Date;
 }

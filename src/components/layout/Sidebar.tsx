@@ -1,19 +1,23 @@
-import { NavLink } from "react-router"
+import { NavLink, useNavigate } from "react-router"
 import Logo from "../../assets/logo.png"
 import { ButtonGlobal } from "../ui/Button"
-import { LayoutDashboard, ClipboardList, Truck, Handshake, Car, History, Package} from "lucide-react";
+import { LayoutDashboard, Truck, Handshake, History, Package, LogOut, type LucideIcon, Car} from "lucide-react";
+import { useAuthStore } from "@/features/auth/store/useAuthStore";
+import { useEspace } from "@/store/useEspace";
+import type { Role } from "@/features/auth/types/auth.types";
 
-const navigations = {
-    client: [
+type Navigation = {
+    path: string,
+    name: string,
+    icon: LucideIcon
+}
+
+const navigations: Record<Role, Navigation[]> = {
+    CLIENT: [
         {
             path: "ensemble",
             name: "Vue d'ensemble",
             icon: LayoutDashboard
-        },
-        {
-            path: "demande",
-            name: "Mes demandes",
-            icon: ClipboardList
         },
         {
             path: "course",
@@ -26,11 +30,6 @@ const navigations = {
             icon: Handshake
         },
         {
-            path: "véhicule",
-            name: "Véhicules",
-            icon: Car
-        },
-        {
             path: "historique",
             name: "Historique & factures",
             icon: History
@@ -41,11 +40,48 @@ const navigations = {
             icon: Package
         }
     ],
-    carrier: [],
-    admin: []
+    CARRIER: [
+        {
+            path: "ensemble",
+            name: "Vue d'ensemble",
+            icon: Package
+        },
+        {
+            path: "vehicule",
+            name: "Véhicule",
+            icon: Car
+        },
+        {
+            path: "course",
+            name: "Voir les courses disponibles",
+            icon: Truck
+        },
+        {
+            path: "offres",
+            name: "Voir les offres proposés",
+            icon: Handshake
+        }
+    ],
+    ADMIN: []
 };
 
 export const Sidebar = () => {
+
+    const navigate = useNavigate();
+
+    const logout = useAuthStore((state) => state.logout);
+
+    const espace = useEspace((state) => state.espace);
+
+    const logoutClick = async () => {
+
+        logout();
+
+        navigate("/login");
+
+        console.log("logout");
+    }
+
     return (
         <div className="h-screen w-full flex flex-col">
 
@@ -80,7 +116,7 @@ export const Sidebar = () => {
 
                 <div className="flex justify-center mt-2 ps-0 lg:ps-10">
                     <div className="w-full">
-                        {navigations.client.map((nav) => {
+                        {navigations[espace].map((nav) => {
                             const Icon = nav.icon;
 
                             return (
@@ -99,9 +135,12 @@ export const Sidebar = () => {
             </div>
 
             {/* Déconnexion */}
-            <div className="shrink-0 px-4 mb-8">
-                <button className="rounded-md p-2 shadow-md w-full" >
-                    Déconnexion
+            <div className="shrink-0 px-4 mb-20 md:mb-8">
+                <button 
+                    className="rounded-md p-2 shadow-md w-full flex justify-center items-center" 
+                    onClick={logoutClick}
+                >
+                    <LogOut size={16} className="me-4"/> Déconnexion
                 </button>
             </div>
 

@@ -1,6 +1,6 @@
 import { RouterProvider } from "react-router"
 import { router } from "./router"
-import { useAuthStore } from "@/features/auth/store/useAuthStore"
+import { useAuthStore } from "@/features/auth/store/useAuthStore";
 
 export const App = () => {
 

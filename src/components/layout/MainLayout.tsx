@@ -7,7 +7,6 @@ import { useAuthStore } from "@/features/auth/store/useAuthStore";
 export const MainLayout = () => {
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    const user = useAuthStore((state) => state.user);
     const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
     const navigate = useNavigate();
 
@@ -15,7 +14,7 @@ export const MainLayout = () => {
         if(!isAuthenticated){
             navigate('/login');
         }
-    })
+    }, [isAuthenticated]);
 
     return (
         <div className="min-h-screen w-full grid grid-cols-1 md:grid-cols-5">

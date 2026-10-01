@@ -1,9 +1,11 @@
-import { useState } from "react"
+import { useEffect } from "react"
 import Burger from "../../assets/burger-bar.png"
 import { Input } from "../ui/Input"
 import { Toogle } from "../ui/Toogle"
 import { Search } from "lucide-react"
 import { useAuthStore } from "@/features/auth/store/useAuthStore"
+import { useEspace } from "@/store/useEspace"
+import type { User } from "@/features/auth/types/auth.types"
 
 interface HeaderProps {
     onMenuClick: () => void
@@ -11,16 +13,17 @@ interface HeaderProps {
 
 export const Header = ({onMenuClick}: HeaderProps ) => {
 
-    const user = useAuthStore((state) => (state.user));
-
+    const user: User | null = useAuthStore((state) => (state.user));
     const isLoading = useAuthStore((state) => (state.isLoading));
+    const espace = useEspace((state) => state.espace);
+    const changeEspace = useEspace((state) => state.changeEspace);
 
-    console.log("isLoading", isLoading)
-
-    const [espaceActive, setEspaceActive] = useState<"client" | "carrier">("client");
-
-    console.log("header", user);
-
+    useEffect(() => {
+        if (user?.role){
+            changeEspace(user.role);
+        }
+        console.log("espace actuelle : ", espace);
+    }, [user, changeEspace])
 
     return (
         <header className="fixed top-0 right-0 z-50 h-18 w-full md:w-[80%] flex items-center shadow-md bg-white py-2 px-4 gap-2 flex justify-between">
@@ -33,8 +36,8 @@ export const Header = ({onMenuClick}: HeaderProps ) => {
                             CLIENT
                         </p>
                     }
-                    isActive={"client" === espaceActive}
-                    onClick={() => setEspaceActive("client")}
+                    isActive={"CLIENT" === espace}
+                    onClick={() => changeEspace("CLIENT")}
                 />
 
                 <Toogle
@@ -44,8 +47,8 @@ export const Header = ({onMenuClick}: HeaderProps ) => {
                             TRANSPORT
                         </p>
                     }
-                    isActive={"carrier" === espaceActive}
-                    onClick={() => setEspaceActive("carrier")}
+                    isActive={"CARRIER" === espace}
+                    onClick={() => changeEspace("CARRIER")}
                 />
             </div>
 
@@ -66,7 +69,7 @@ export const Header = ({onMenuClick}: HeaderProps ) => {
             </button>
 
             <div className="shadow-lg rounded-lg h-full w-64 hidden md:flex items-center justify-center">
-                {isLoading?"chargement...": user?.nom}
+                {isLoading?"chargement...":user?.nom}
             </div>
 
         </header>
