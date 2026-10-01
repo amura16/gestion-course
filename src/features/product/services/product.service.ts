@@ -11,9 +11,7 @@ export async function getProducts(): Promise<Product[]> {
     }
 }
 
-export async function createProduct(
-    data: CreateProductData
-): Promise<Product> {
+export async function createProduct(data: CreateProductData): Promise<Product> {
     try {
         return await createProductApi(data);
     } catch (error) {

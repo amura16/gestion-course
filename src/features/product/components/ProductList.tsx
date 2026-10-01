@@ -51,7 +51,9 @@ export const ProductList = () => {
             </div>
         );
     }
-
+    const modifier = () => {
+        
+    }
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {products.map((product) => (
@@ -90,6 +92,16 @@ export const ProductList = () => {
                             <strong>Status :</strong>{" "}
                             {product.status}
                         </p>
+
+                        <div className="w-full mt-4 flex justify-between">
+                            <button className="p-2 border rounded-md">
+                                modifier
+                            </button>
+
+                            <button className="p-2 border rounded-md bg-red-600 text-white">
+                                supprimer
+                            </button>
+                        </div>
                     </div>
                 </div>
             ))}
