@@ -1,9 +1,16 @@
+import { useDeleteProduct } from "../hooks/useDeleteProduct";
 import { useProduit } from "../hooks/useGetProduct";
 import type { Product } from "../types/product.types";
 
 export const ProductList = () => {
 
     const { data, isPending, isError, error } = useProduit();
+
+    const deleteMutation = useDeleteProduct();
+
+    const heandleDelete = (productId: number) => {
+        deleteMutation.mutate(productId);
+    }
 
     if (isPending) {
         return <p>Chargement des produits...</p>;
@@ -17,7 +24,7 @@ export const ProductList = () => {
         );
     }
 
-    if (data.length === 0) {
+    if (data === null) {
         return (
             <div className="p-6 bg-white rounded-lg text-gray-500">
                 Aucun produit trouvé.
@@ -69,8 +76,13 @@ export const ProductList = () => {
                                 modifier
                             </button>
 
-                            <button className="p-2 border rounded-md bg-red-600 text-white">
-                                supprimer
+                            <button 
+                                className="p-2 border rounded-md bg-red-600 text-white"
+                                onClick={() => heandleDelete(product.id)}
+                            >
+                                {
+                                    deleteMutation.isPending?"Suppression...": "Supprimer"
+                                }
                             </button>
                         </div>
                     </div>

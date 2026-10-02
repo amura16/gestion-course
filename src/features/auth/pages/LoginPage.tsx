@@ -6,6 +6,9 @@ export function LoginPage() {
     const isLoading = useAuthStore((state) => (state.isLoading));
     const isAuthenticated = useAuthStore((state) => (state.isAuthenticated));
 
+    console.log("loading",isLoading);
+    console.log(isAuthenticated);
+
     if (isLoading) {
         return <p>Chargement...</p>;
     }

@@ -2,11 +2,7 @@ import { useState } from "react";
 import type { CreateProductData } from "../types/product.types";
 import { useCreateProduct } from "../hooks/useCreateProduct";
 
-interface ProductFormProps {
-    onCreated?: () => void;
-}
-
-export const ProductForm = ({ onCreated }: ProductFormProps) => {
+export const ProductForm = () => {
     const [formData, setFormData] = useState<CreateProductData>({
         description: "",
         poids: 0,
