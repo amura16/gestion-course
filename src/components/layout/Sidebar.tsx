@@ -73,6 +73,12 @@ export const Sidebar = () => {
 
     const espace = useEspace((state) => state.espace);
 
+    const rolePath = {
+        CLIENT: "client",
+        CARRIER: "carrier",
+        ADMIN: "admin"
+    }
+
     const logoutClick = async () => {
 
         logout();
@@ -123,7 +129,7 @@ export const Sidebar = () => {
                                 <NavLink
                                     key={nav.path}
                                     className={({ isActive }) => `flex gap-3 items-center my-3 p-2 ${isActive? "bg-white rounded-md": ""}`}
-                                    to={nav.path}
+                                    to={`/${rolePath[espace]}/${nav.path}`}
                                 >
                                     <Icon size={20} />
                                     <span>{nav.name}</span>
