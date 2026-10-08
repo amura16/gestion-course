@@ -20,9 +20,7 @@ export const ProductPage = () => {
                 {isActive === "produits" && <ProductList />}
 
                 {isActive === "creer" && (
-                    <ProductForm
-                        onCreated={() => setIsActive("produits")}
-                    />
+                    <ProductForm />
                 )}
             </div>
         </div>

@@ -24,7 +24,7 @@ export const ProductList = () => {
         );
     }
 
-    if (data === null) {
+    if (data === null || data.length === 0) {
         return (
             <div className="p-6 bg-white rounded-lg text-gray-500">
                 Aucun produit trouvé.
