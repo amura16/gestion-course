@@ -1,19 +1,21 @@
-interface CardProps {
-    content: string;
-    isActive: boolean;
-    onClick: () => void;
-}
+import type { ReactNode } from "react";
 
-export const Card = ({ content, isActive, onClick}: CardProps) => {
-
-    const activated = `${isActive?"bg-gray-100": "bg-white"}`
-
-    return (
-        <div 
-            className={`w-[200px] h-[60px] rounded-md shadow-md flex justify-center items-center ${activated}`}
-            onClick={onClick}
-        >
-            {content}
-        </div>
-    );
+type CardProps = {
+    title?: string;
+    description?: string;
+    children: ReactNode;
+    className?: string;
+    onClick?: () => void;
 };
+
+export const Card = ({ title, description, children, className = "", onClick }: CardProps) => (
+    <div onClick={onClick} className={`rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow duration-200 hover:shadow-md ${className}`}>
+        {(title || description) && (
+            <div className="mb-4">
+                {title && <h2 className="text-lg font-semibold text-slate-800">{title}</h2>}
+                {description && <p className="mt-1 text-sm text-slate-500">{description}</p>}
+            </div>
+        )}
+        {children}
+    </div>
+);

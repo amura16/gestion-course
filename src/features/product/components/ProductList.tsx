@@ -1,93 +1,95 @@
-import { useDeleteProduct } from "../hooks/useDeleteProduct";
-import { useProduit } from "../hooks/useGetProduct";
+import { Pencil, Trash2 } from "lucide-react";
 import type { Product } from "../types/product.types";
+import { useState } from "react";
+import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
 
-export const ProductList = () => {
+type ProductListProps = {
+    products: Product[];
+    onEdit: (product: Product) => void;
+    onDelete: (product: Product) => void;
+};
 
-    const { data, isPending, isError, error } = useProduit();
+const statusLabels = {
+    IN_STOCK: "En stock",
+    SHIPPED: "Expédié",
+    DELIVERED: "Livré",
+};
 
-    const deleteMutation = useDeleteProduct();
+const statusStyles = {
+    IN_STOCK: "bg-blue-100 text-blue-700",
+    SHIPPED: "bg-orange-100 text-orange-700",
+    DELIVERED: "bg-emerald-100 text-emerald-700",
+};
 
-    const heandleDelete = (productId: number) => {
-        deleteMutation.mutate(productId);
-    }
+const formatDate = (date: string) => new Intl.DateTimeFormat("fr-FR", { dateStyle: "short" }).format(new Date(date));
 
-    if (isPending) {
-        return <p>Chargement des produits...</p>;
-    }
+export const ProductList = ({ products, onEdit, onDelete }: ProductListProps) => {
+    const [productToDelete, setProductToDelete] = useState<Product | null>(null);
 
-    if (isError) {
-        return (
-            <div className="p-4 bg-red-100 text-red-700 rounded-md">
-                {error.message}
-            </div>
-        );
-    }
+    const handleDelete = () => {
+        if (productToDelete) {
+            onDelete(productToDelete);
+        }
 
-    if (data === null || data.length === 0) {
-        return (
-            <div className="p-6 bg-white rounded-lg text-gray-500">
-                Aucun produit trouvé.
-            </div>
-        );
+        setProductToDelete(null);
     }
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {data.map((product: Product) => (
-                <div
-                    key={product.id}
-                    className="bg-white rounded-lg shadow-md p-5"
-                >
-                    <h3 className="font-semibold text-lg mb-3">
-                        {product.description}
-                    </h3>
+        <div className="w-full overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
+            <table className="w-full min-w-[1000px] text-left text-sm">
+                <thead className="border-b border-slate-200 bg-slate-50 text-slate-600">
+                    <tr>
+                        <th className="px-5 py-4 font-semibold">Produit</th>
+                        <th className="px-5 py-4 font-semibold">Volume</th>
+                        <th className="px-5 py-4 font-semibold">Origine</th>
+                        <th className="px-5 py-4 font-semibold">Date de création</th>
+                        <th className="px-5 py-4 font-semibold">Dernier mise à jour</th>
+                        <th className="px-5 py-4 font-semibold">Statut</th>
+                        <th className="px-5 py-4 text-center font-semibold">Actions</th>
+                    </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100">
+                    {products.length > 0 ? products.map((product) => (
+                        <tr key={product.id} className="transition-colors hover:bg-slate-50">
+                            <td className="px-5 py-4 font-medium text-slate-800">{product.name}</td>
+                            <td className="px-5 py-4 text-slate-600">{product.volume} m³</td>
+                            <td className="px-5 py-4 text-slate-600">{product.origin}</td>
+                            <td className="px-5 py-4 text-slate-600">{formatDate(product.createdAt)}</td>
+                            <td className="px-5 py-4 text-slate-600">{formatDate(product.updatedAt)}</td>
+                            <td className="px-5 py-4">
+                                <span className={`rounded-full px-3 py-1 text-xs font-medium ${statusStyles[product.status]}`}>
+                                    {statusLabels[product.status]}
+                                </span>
+                            </td>
+                            <td className="px-5 py-4">
+                                <div className="flex items-center justify-center gap-2">
+                                    <button type="button" onClick={() => onEdit(product)} aria-label={`Modifier ${product.name}`} className="rounded-lg p-2 text-blue-600 transition-colors hover:bg-blue-50">
+                                        <Pencil size={18} />
+                                    </button>
+                                    <button type="button" onClick={() => setProductToDelete(product)} aria-label={`Supprimer ${product.name}`} className="rounded-lg p-2 text-red-600 transition-colors hover:bg-red-50">
+                                        <Trash2 size={18} />
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    )) : (
+                        <tr>
+                            <td colSpan={7} className="px-5 py-10 text-center text-slate-500">
+                                Aucun produit trouvé.
+                            </td>
+                        </tr>
+                    )}
+                </tbody>
+            </table>
 
-                    <div className="space-y-1 text-sm text-gray-600">
-                        <p>
-                            <strong>Poids :</strong>{" "}
-                            {product.poids}
-                        </p>
-
-                        <p>
-                            <strong>Dimensions :</strong>{" "}
-                            {product.longueur} ×{" "}
-                            {product.largeur} ×{" "}
-                            {product.hauteur}
-                        </p>
-
-                        <p>
-                            <strong>Volume :</strong>{" "}
-                            {product.volume}
-                        </p>
-
-                        <p>
-                            <strong>Origine :</strong>{" "}
-                            {product.origine}
-                        </p>
-
-                        <p>
-                            <strong>Status :</strong>{" "}
-                            {product.status}
-                        </p>
-
-                        <div className="w-full mt-4 flex justify-between">
-                            <button className="p-2 border rounded-md">
-                                modifier
-                            </button>
-
-                            <button 
-                                className="p-2 border rounded-md bg-red-600 text-white"
-                                onClick={() => heandleDelete(product.id)}
-                            >
-                                {
-                                    deleteMutation.isPending?"Suppression...": "Supprimer"
-                                }
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            ))}
+            <ConfirmDialog
+                isOpen={productToDelete !== null}
+                title="Supprimer le produit ?"
+                message={`Voulez-vous vraiment supprimer le produit « ${productToDelete?.name} » ? Cette action est irréversible.`}
+                onCancel={() => setProductToDelete(null)}
+                onConfirm={handleDelete}
+            />
         </div>
-    );
-};
+    )
+}
+    

@@ -10,13 +10,14 @@ interface ButtonProps {
     custom?: string;
     content: ReactNode;
     font?: string;
+    onClick?: () => void;
 }
 
-export const ButtonGlobal = ({variant, size, content, font="font-manrope", custom}: ButtonProps) => {
+export const ButtonGlobal = ({variant, size, content, font="font-manrope", custom, onClick}: ButtonProps) => {
 
     const variantSize = {
         small: "rounded-md py-1 px-2",
-        medium: "rounded-md py-2 px-4",
+        medium: "rounded-xl py-2 px-4",
         large: "rounded-2xl py-2 px-2 lg:px-6"
     }
 
@@ -28,7 +29,7 @@ export const ButtonGlobal = ({variant, size, content, font="font-manrope", custo
     };
 
     return (
-        <button className={`w-full ${variantClasses[variant]} ${variantSize[size]} ${font} ${custom}`}>
+        <button className={`w-full ${variantClasses[variant]} ${variantSize[size]} ${font} ${custom}`} onClick={onClick}>
             {content}
         </button>
     )

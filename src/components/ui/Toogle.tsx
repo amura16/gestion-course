@@ -14,7 +14,7 @@ export const Toogle = ({content, onClick,size, isActive=false}: ToogleProps) => 
 
     return (
         <div 
-            className={`w-${size} ${isActive && activated} px-2 h-full w-full flex justify-center items-center`}
+            className={`w-${size} ${isActive && activated} px-2 h-full w-full flex justify-center items-center cursor-pointer`}
             onClick={onClick}
         >
             {content}

@@ -10,15 +10,7 @@ interface InputProps {
     disabled?: boolean;
 }
 
-export const Input = ({
-    placeholder,
-    value,
-    onChange,
-    leftContent,
-    rightContent,
-    type = "text",
-    disabled = false,
-}: InputProps) => {
+export const Input = ({placeholder, value, onChange, leftContent, rightContent, type = "text", disabled = false}: InputProps) => {
     return (
         <div className="flex items-center w-full h-10 bg-white border border-gray-200 rounded-lg px-3 shadow-sm focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-100 transition">
 

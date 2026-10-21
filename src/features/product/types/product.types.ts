@@ -1,18 +1,12 @@
-export interface Product {
+export type Product = {
     id: number;
-    description: string;
-    poids: number;
-    longueur: number;
-    largeur: number;
-    hauteur: number;
+    name: string;
     volume: number;
-    origine: string;
-    status: string;
-    userId: number;
-    shipmentId: number | null;
+    origin: string;
     createdAt: string;
     updatedAt: string;
-}
+    status: "IN_STOCK" | "SHIPPED" | "DELIVERED";
+};
 
 export interface CreateProductData {
     description: string;

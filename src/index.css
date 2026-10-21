@@ -11,7 +11,7 @@
   /* Polices de base */
   --font-inter: "Inter", sans-serif;
   --font-manrope: "Manrope", sans-serif;
-  
+
   --font-body-md: "Inter", sans-serif;
   --font-body-sm: "Inter", sans-serif;
   --font-label-sm: "Inter", sans-serif;
@@ -22,4 +22,19 @@
   --font-headline-md: "Manrope", sans-serif;
   --font-headline-lg: "Manrope", sans-serif;
   --font-display-hero: "Manrope", sans-serif;
+}
+
+@keyframes slide-down {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-slide-down {
+    animation: slide-down 300ms ease-out;
 }
