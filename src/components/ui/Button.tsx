@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 type VariantClasses = "primary" | "secondary" | "tertiary" | "neutral"
 
 type SizeClasses = "small" | "medium" | "large"
@@ -6,10 +8,11 @@ interface ButtonProps {
     variant: VariantClasses;
     size: SizeClasses;
     custom?: string;
-    content: string;
+    content: ReactNode;
+    font?: string;
 }
 
-export const ButtonGlobal = ({variant, size, content}: ButtonProps) => {
+export const ButtonGlobal = ({variant, size, content, font="font-manrope", custom}: ButtonProps) => {
 
     const variantSize = {
         small: "rounded-md py-1 px-2",
@@ -25,7 +28,7 @@ export const ButtonGlobal = ({variant, size, content}: ButtonProps) => {
     };
 
     return (
-        <button className={`${variantClasses[variant]} ${variantSize[size]}`}>
+        <button className={`w-full ${variantClasses[variant]} ${variantSize[size]} ${font} ${custom}`}>
             {content}
         </button>
     )

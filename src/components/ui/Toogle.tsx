@@ -10,7 +10,7 @@ interface ToogleProps {
 
 export const Toogle = ({content, onClick,size, isActive=false}: ToogleProps) => {
 
-    const activated = " bg-white rounded-md";
+    const activated = " bg-white rounded-2xl";
 
     return (
         <div 

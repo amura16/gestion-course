@@ -1,77 +1,110 @@
-import { useEffect } from "react"
-import Burger from "../../assets/burger-bar.png"
-import { Input } from "../ui/Input"
-import { Toogle } from "../ui/Toogle"
-import { Search } from "lucide-react"
-import { useAuthStore } from "@/features/auth/store/useAuthStore"
-import { useEspace } from "@/store/useEspace"
-import type { User } from "@/features/auth/types/auth.types"
+import { useEffect } from "react";
+import { Input } from "../ui/Input";
+import { Toogle } from "../ui/Toogle";
+import {Search,Bell,Menu, User as UserIcon} from "lucide-react";
+import { useAuthStore } from "@/features/auth/store/useAuthStore";
+import { useEspace } from "@/store/useEspace";
+import type { User } from "@/features/auth/types/auth.types";
 
 interface HeaderProps {
-    onMenuClick: () => void
+    onMenuClick: () => void;
+    sidebarOpen: boolean;
 }
 
-export const Header = ({onMenuClick}: HeaderProps ) => {
+export const Header = ({onMenuClick, sidebarOpen}: HeaderProps) => {
 
-    const user: User | null = useAuthStore((state) => (state.user));
-    const isLoading = useAuthStore((state) => (state.isLoading));
+    const user: User | null = useAuthStore((state) => state.user);
+
+    const isLoading = useAuthStore((state) => state.isLoading);
+
     const espace = useEspace((state) => state.espace);
+
     const changeEspace = useEspace((state) => state.changeEspace);
 
     useEffect(() => {
-        if (user?.role){
+        if (user?.role) {
             changeEspace(user.role);
         }
-        console.log("espace actuelle : ", espace);
-    }, [user, changeEspace])
+    }, [user, changeEspace]);
 
     return (
-        <header className="fixed top-0 right-0 z-50 h-18 w-full md:w-[80%] flex items-center shadow-md bg-white py-2 px-4 gap-2 flex justify-between">
+        <header className={`fixed right-0 top-0 z-40 flex h-16 items-center gap-3 bg-white px-4 shadow-sm transition-[left,width] duration-300 ${sidebarOpen ? "left-0 md:left-[260px] md:w-[calc(100%-260px)]" : "left-0 w-full"}`}>
 
-            <div className="hidden sm:flex bg-gray-200 rounded-lg w-60 shadow-lg items-center">
+            {/* Bouton menu desktop/mobile */}
+            <button
+                type="button"
+                onClick={onMenuClick}
+                aria-label="Ouvrir le menu"
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-slate-600 transition-all duration-200 hover:bg-slate-100 hover:text-slate-900 active:scale-95"
+            >
+                {!sidebarOpen && <Menu size={21} />}
+            </button>
+
+            {/* Espace */}
+            <div className="hidden h-11 w-56 shrink-0 items-center rounded-xl bg-slate-100 p-1 shadow-inner sm:flex">
+
                 <Toogle
                     content={
-                        <p className="text-center text-sm">
-                            ESPACE <br />
+                        <p className="text-center text-[11px] leading-tight">
+                            ESPACE
+                            <br />
                             CLIENT
                         </p>
                     }
-                    isActive={"CLIENT" === espace}
+                    isActive={espace === "CLIENT"}
                     onClick={() => changeEspace("CLIENT")}
                 />
 
                 <Toogle
                     content={
-                        <p className="text-center text-sm">
-                            ESPACE <br />
+                        <p className="text-center text-[11px] leading-tight">
+                            ESPACE
+                            <br />
                             TRANSPORT
                         </p>
                     }
-                    isActive={"CARRIER" === espace}
+                    isActive={espace === "CARRIER"}
                     onClick={() => changeEspace("CARRIER")}
                 />
+
             </div>
 
-            {/* search bar */}
-            <div className="w-75 border rounded-lg shadow-lg">
-                <Input 
-                    leftContent={<Search size={18} />}
-                    placeholder="Rechercher"
-                />
+            {/* Search */}
+            <div className="min-w-0 flex-1">
+                <div className="mx-auto w-full max-w-xl">
+                    <Input
+                        leftContent={
+                            <Search
+                                size={18}
+                                className="text-slate-400"
+                            />
+                        }
+                        placeholder="Rechercher..."
+                    />
+                </div>
             </div>
 
-            {/* Burger mobile */}
+            {/* Notification */}
             <button
-                className="ml-4 text-2xl md:hidden"
-                onClick={onMenuClick}
+                type="button"
+                aria-label="Notifications"
+                className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-slate-600 transition-all duration-200 hover:bg-slate-100 hover:text-slate-900 active:scale-95"
             >
-                <img src={Burger} alt="" className="h-8 w-14"/>
+                <Bell size={20} />
+
+                <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-blue-500 ring-2 ring-white" />
             </button>
 
-            <div className="shadow-lg rounded-lg h-full w-64 hidden md:flex items-center justify-center">
-                {isLoading?"chargement...":user?.nom}
+            {/* Utilisateur */}
+            <div className="hidden h-10 max-w-40 shrink-0 items-center rounded-xl border border-slate-200 bg-white px-4 text-sm font-semibold text-slate-700 shadow-sm md:flex">
+                <span className="truncate">
+                    {isLoading
+                        ? "Chargement..."
+                        : user?.nom ?? <UserIcon size={20}/>
+                    }
+                </span>
             </div>
 
         </header>
-    )
-}
+    );
+};

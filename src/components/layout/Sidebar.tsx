@@ -1,155 +1,236 @@
-import { NavLink, useNavigate } from "react-router"
-import Logo from "../../assets/logo.png"
-import { ButtonGlobal } from "../ui/Button"
-import { LayoutDashboard, Truck, Handshake, History, Package, LogOut, type LucideIcon, Car} from "lucide-react";
+import { NavLink, useNavigate } from "react-router";
+import Logo from "../../assets/logo.png";
+import { ButtonGlobal } from "../ui/Button";
+import {LayoutDashboard, Truck, Handshake, History, Package, LogOut, type LucideIcon, Car, Zap, X,} from "lucide-react";
 import { useAuthStore } from "@/features/auth/store/useAuthStore";
 import { useEspace } from "@/store/useEspace";
 import type { Role } from "@/features/auth/types/auth.types";
 
 type Navigation = {
-    path: string,
-    name: string,
-    icon: LucideIcon
-}
+    path: string;
+    name: string;
+    icon: LucideIcon;
+};
+
+type SidebarProps = {
+    isOpen: boolean;
+    onClose: () => void;
+};
 
 const navigations: Record<Role, Navigation[]> = {
     CLIENT: [
         {
             path: "ensemble",
             name: "Vue d'ensemble",
-            icon: LayoutDashboard
+            icon: LayoutDashboard,
         },
         {
             path: "course",
             name: "Courses en cours",
-            icon: Truck
+            icon: Truck,
         },
         {
             path: "offre",
             name: "Offres & Comparateur",
-            icon: Handshake
+            icon: Handshake,
         },
         {
             path: "historique",
             name: "Historique & factures",
-            icon: History
+            icon: History,
         },
         {
             path: "produit",
             name: "Produits",
-            icon: Package
-        }
+            icon: Package,
+        },
     ],
+
     CARRIER: [
         {
             path: "ensemble",
             name: "Vue d'ensemble",
-            icon: Package
+            icon: Package,
         },
         {
             path: "vehicule",
             name: "Véhicule",
-            icon: Car
+            icon: Car,
         },
         {
             path: "course",
             name: "Voir les courses disponibles",
-            icon: Truck
+            icon: Truck,
         },
         {
             path: "offres",
             name: "Voir les offres proposés",
-            icon: Handshake
-        }
+            icon: Handshake,
+        },
     ],
-    ADMIN: []
+
+    ADMIN: [],
 };
 
-export const Sidebar = () => {
+export const Sidebar = ({isOpen, onClose}: SidebarProps) => {
 
     const navigate = useNavigate();
 
-    const logout = useAuthStore((state) => state.logout);
+    const logout = useAuthStore(
+        (state) => state.logout
+    );
 
-    const espace = useEspace((state) => state.espace);
+    const espace = useEspace(
+        (state) => state.espace
+    );
 
-    const rolePath = {
+    const rolePath: Record<Role, string> = {
         CLIENT: "client",
         CARRIER: "carrier",
-        ADMIN: "admin"
-    }
+        ADMIN: "admin",
+    };
 
     const logoutClick = async () => {
-
         logout();
-
         navigate("/login");
-
-        console.log("logout");
-    }
+        onClose();
+    };
 
     return (
-        <div className="h-screen w-full flex flex-col">
+        <aside className={`fixed left-0 top-0 z-[60] flex h-screen w-full flex-col bg-white shadow-xl transition-transform duration-300 ease-in-out md:sticky md:left-auto md:top-0 md:h-screen md:w-[260px] md:shadow-md ${isOpen ? "translate-y-0 md:translate-x-0" : "-translate-y-full md:-translate-x-full"}`}>
 
-            {/* Logo */}
-            <div className="h-18 shrink-0 w-full flex justify-between items-center gap-4 px-4 shadow-md">
-                <img
-                    src={Logo}
-                    alt="logo"
-                    className="w-12 h-10"
-                />
+            {/* Header du sidebar */}
+            <div className="flex h-16 shrink-0 items-center justify-between border-b border-slate-100 px-5">
 
-                <h1 className="font-bold h-10 w-full flex items-center text-neutral">
-                    MGIT-DRIVE
-                </h1>
+                <div className="flex min-w-0 items-center gap-3">
+                    <img
+                        src={Logo}
+                        alt="Logo MGIT-DRIVE"
+                        className="h-10 w-10 shrink-0 object-contain"
+                    />
+
+                    <h1 className="truncate text-lg font-bold tracking-tight text-slate-800">
+                        MGIT-DRIVE
+                    </h1>
+                </div>
+
+                {/* Fermer */}
+                <button
+                    type="button"
+                    onClick={onClose}
+                    aria-label="Fermer le menu"
+                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-slate-500 transition-all duration-200 hover:bg-slate-100 hover:text-slate-900 active:scale-95"
+                >
+                    <X size={20} />
+                </button>
+
             </div>
 
-            {/* Nouvelle demande */}
-            <div className="shrink-0 w-full flex flex-col items-center pt-4">
-                <ButtonGlobal
-                    content="nouvelle demande"
-                    size="large"
-                    variant="primary"
-                />
-            </div>
+            {/* Contenu */}
+            <div className="flex min-h-0 flex-1 flex-col">
 
-            {/* Navigation */}
-            <div className="flex-1 min-h-0 w-full mt-6 px-4 overflow-y-auto">
+                {/* Nouvelle demande */}
+                <div className="w-full shrink-0 px-3 pt-5">
 
-                <p className="text-gray-400 text-sm">
-                    NAVIGATION
-                </p>
+                    <ButtonGlobal
+                        size="large"
+                        variant="primary"
+                        content={
+                            <div className="flex items-center justify-center gap-2 whitespace-nowrap">
+                                <Zap
+                                    size={20}
+                                    className="shrink-0"
+                                />
 
-                <div className="flex justify-center mt-2 ps-0 lg:ps-10">
-                    <div className="w-full">
+                                <span className="font-semibold">
+                                    Nouvelle demande
+                                </span>
+                            </div>
+                        }
+                    />
+
+                </div>
+
+                {/* Navigation */}
+                <div className="min-h-0 flex-1 overflow-y-auto px-3 pt-7">
+
+                    <p className="px-3 text-[11px] font-bold uppercase tracking-[0.15em] text-slate-400">
+                        Navigation
+                    </p>
+
+                    <nav className="mt-3 space-y-1">
+
                         {navigations[espace].map((nav) => {
+
                             const Icon = nav.icon;
 
                             return (
                                 <NavLink
                                     key={nav.path}
-                                    className={({ isActive }) => `flex gap-3 items-center my-3 p-2 ${isActive? "bg-white rounded-md": ""}`}
                                     to={`/${rolePath[espace]}/${nav.path}`}
+                                    onClick={() => {
+                                        // Sur mobile, on ferme après navigation.
+                                        if (window.innerWidth < 768) {
+                                            onClose();
+                                        }
+                                    }}
+                                    className={({ isActive }) =>
+                                        `
+                                        group flex items-center gap-3 rounded-xl px-3 py-3 text-sm transition-all duration-200
+                                        ${isActive? 
+                                            `bg-blue-500/10 font-bold text-blue-700 shadow-sm` : 
+                                            `font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900 hover:translate-x-0.5`}
+                                        `
+                                    }
                                 >
-                                    <Icon size={20} />
-                                    <span>{nav.name}</span>
+
+                                    {({ isActive }) => (
+                                        <>
+                                            <span
+                                                className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg transition-all duration-200
+                                                    ${
+                                                        isActive
+                                                            ? "bg-blue-500/15 text-blue-600" : 
+                                                            "bg-slate-100 text-slate-500 group-hover:bg-white group-hover:text-slate-700"
+                                                    }
+                                                `}
+                                            >
+                                                <Icon size={19} />
+                                            </span>
+
+                                            <span className="truncate">
+                                                {nav.name}
+                                            </span>
+                                        </>
+                                    )}
+
                                 </NavLink>
-                            )
+                            );
                         })}
-                    </div>
+
+                    </nav>
                 </div>
+
+                {/* Déconnexion */}
+                <div className="shrink-0 border-t border-slate-100 px-3 pb-6 pt-4">
+
+                    <button
+                        type="button"
+                        className=" group flex w-full items-center justify-center gap-3 rounded-xl border border-slate-200 p-3 font-medium text-slate-600 transition-all duration-200 hover:border-red-100 hover:bg-red-50 hover:text-red-600 active:scale-[0.98]"
+                        onClick={logoutClick}
+                    >
+                        <LogOut
+                            size={17}
+                            className="transition-transform duration-200 group-hover:-translate-x-0.5"
+                        />
+
+                        Déconnexion
+                    </button>
+
+                </div>
+
             </div>
 
-            {/* Déconnexion */}
-            <div className="shrink-0 px-4 mb-20 md:mb-8">
-                <button 
-                    className="rounded-md p-2 shadow-md w-full flex justify-center items-center" 
-                    onClick={logoutClick}
-                >
-                    <LogOut size={16} className="me-4"/> Déconnexion
-                </button>
-            </div>
-
-        </div>
+        </aside>
     );
 };
