@@ -97,7 +97,7 @@ export const Sidebar = ({isOpen, onClose}: SidebarProps) => {
     };
 
     return (
-        <aside className={`fixed left-0 top-0 z-[60] flex h-screen w-full flex-col bg-white shadow-xl transition-transform duration-300 ease-in-out md:w-[260px] md:shadow-md ${isOpen ? "translate-y-0 md:translate-x-0" : "-translate-y-full md:-translate-x-full"}`}>
+        <aside className={`fixed left-0 top-0 z-[60] flex h-screen w-full md:w-auto flex-col bg-white shadow-xl transition-transform duration-300 ease-in-out md:w-[260px] md:shadow-md ${isOpen ? "translate-y-0 md:translate-x-0" : "-translate-y-full md:-translate-x-full"}`}>
             <div className="flex h-16 shrink-0 items-center justify-between border-b border-slate-100 px-5">
 
                 <div className="flex min-w-0 items-center gap-3">

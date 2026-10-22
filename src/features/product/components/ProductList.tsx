@@ -1,13 +1,7 @@
 import { Pencil, Trash2 } from "lucide-react";
-import type { Product } from "../types/product.types";
+import type { Product, ProductListProps } from "../types/product.types";
 import { useState } from "react";
 import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
-
-type ProductListProps = {
-    products: Product[];
-    onEdit: (product: Product) => void;
-    onDelete: (product: Product) => void;
-};
 
 const statusLabels = {
     IN_STOCK: "En stock",
@@ -28,7 +22,7 @@ export const ProductList = ({ products, onEdit, onDelete }: ProductListProps) =>
 
     const handleDelete = () => {
         if (productToDelete) {
-            onDelete(productToDelete);
+            onDelete(productToDelete.id);
         }
 
         setProductToDelete(null);

@@ -1,33 +1,9 @@
 import { useForm } from "react-hook-form";
 import { Package, Ruler, Weight, X } from "lucide-react";
+import type { CreateProductData, ProductFormProps } from "../types/product.types";
 
-export interface CreateProductData {
-    description: string;
-    poids: number;
-    longueur: number;
-    largeur: number;
-    hauteur: number;
-    origine: string;
-}
-
-type ProductFormProps = {
-    onSubmit: (data: CreateProductData) => void;
-    onCancel: () => void;
-    initialData?: CreateProductData;
-    isSubmitting?: boolean;
-};
-
-export const ProductForm = ({
-    onSubmit,
-    onCancel,
-    initialData,
-    isSubmitting = false,
-}: ProductFormProps) => {
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm<CreateProductData>({
+export const ProductForm = ({onSubmit, onCancel, initialData, isSubmitting = false}: ProductFormProps) => {
+    const {register,handleSubmit, formState: { errors }} = useForm<CreateProductData>({
         defaultValues: initialData ?? {
             description: "",
             poids: 0,
@@ -39,7 +15,10 @@ export const ProductForm = ({
     });
 
     const submitForm = (data: CreateProductData) => {
-        onSubmit(data);
+        onSubmit({
+            ...data,
+            status: "IN_STOCK"
+        });
     };
 
     const inputClass =

@@ -17,3 +17,16 @@ export interface CreateProductData {
     origine: string;
     status: string
 }
+
+export interface ProductListProps {
+    products: Product[];
+    onEdit: (product: Product) => void;
+    onDelete: (id: number) => void;
+};
+
+export interface ProductFormProps {
+    onSubmit: (data: CreateProductData) => void;
+    onCancel: () => void;
+    initialData?: CreateProductData;
+    isSubmitting?: boolean;
+};

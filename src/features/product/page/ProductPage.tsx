@@ -6,6 +6,7 @@ import { ProductList } from "../components/ProductList";
 import type { Product } from "../types/product.types";
 import { ProductForm } from "../components/ProductForm";
 import { useDeleteProduct } from "../hooks/useDeleteProduct";
+import { useCreateProduct } from "../hooks/useCreateProduct";
 
 const initialProducts: Product[] = [
     { id: 1, name: "Riz", volume: 25, origin: "Antananarivo", createdAt: "2026-10-01", updatedAt: "2026-10-15", status: "IN_STOCK" },
@@ -15,7 +16,10 @@ const initialProducts: Product[] = [
 
 export function ProductPage() {
     const [formOpened, setFormOpened] = useState<boolean>(false);
-    const [products, setProducts] = useState<Product[]>(initialProducts);
+    const [products, ] = useState<Product[]>(initialProducts);
+
+    const {mutate: createProductMutation} = useCreateProduct();
+    const {mutate: deleteProductMutation} = useDeleteProduct();
 
     const handleEdit = (product: Product) => {
         console.log("Modifier :", product);
@@ -50,10 +54,10 @@ export function ProductPage() {
                 </div>
                 {formOpened && (
                     <div className="p-6">
-                        <ProductForm onSubmit={handleCreate} onCancel={() => setFormOpened(false)} />
+                        <ProductForm onSubmit={createProductMutation} onCancel={() => setFormOpened(false)} />
                     </div>
                 )}
-                <ProductList products={products} onEdit={handleEdit} onDelete={useDeleteProduct} />
+                <ProductList products={products} onEdit={handleEdit} onDelete={deleteProductMutation} />
             </div>
         </div>
     );
