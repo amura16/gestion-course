@@ -1,5 +1,5 @@
 import { api } from "@/lib/axios";
-import type { CreateProductData, Product } from "../types/product.types";
+import type { CreateProductData, Product, UpdateProductData } from "../types/product.types";
 
 export async function getProducts(): Promise<Product[] | null> {
     try {
@@ -33,6 +33,21 @@ export async function createProduct(data: CreateProductData): Promise<Product | 
     }
 
 
+}
+
+export async function updateProduct(input: UpdateProductData) {
+    const {id, ...data} = input;
+    try {
+        const response = await api.put(`/product/${id}`, data);
+
+        if (!response.data) {
+            throw new Error("Impossible de créer le produit");
+        }
+        return response.data;
+    } catch(error) {
+        console.log(error);
+        return null;
+    }
 }
 
 export async function deleteProduct(id: Product["id"]) {

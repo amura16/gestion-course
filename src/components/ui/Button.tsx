@@ -13,7 +13,7 @@ interface ButtonProps {
     onClick?: () => void;
 }
 
-export const ButtonGlobal = ({variant, size, content, font="font-manrope", custom, onClick}: ButtonProps) => {
+export const Button = ({variant, size, content, font="font-manrope", custom, onClick}: ButtonProps) => {
 
     const variantSize = {
         small: "rounded-md py-1 px-2",

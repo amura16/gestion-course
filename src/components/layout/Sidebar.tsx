@@ -1,6 +1,6 @@
 import { NavLink, useNavigate } from "react-router";
 import Logo from "../../assets/logo.png";
-import { ButtonGlobal } from "../ui/Button";
+import { Button } from "../ui/Button";
 import {LayoutDashboard, Truck, Handshake, History, Package, LogOut, type LucideIcon, Car, Zap, X,} from "lucide-react";
 import { useAuthStore } from "@/features/auth/store/useAuthStore";
 import { useEspace } from "@/store/useEspace";
@@ -130,7 +130,7 @@ export const Sidebar = ({onClose}: SidebarProps) => {
                 {/* Nouvelle demande */}
                 <div className="w-full shrink-0 px-3 pt-5">
 
-                    <ButtonGlobal
+                    <Button
                         size="large"
                         variant="primary"
                         content={
