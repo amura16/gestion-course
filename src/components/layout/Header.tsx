@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Input } from "../ui/Input";
 import {Search,Bell,Menu, User as UserIcon} from "lucide-react";
 import { useAuthStore } from "@/features/auth/store/useAuthStore";
-import { useEspace } from "@/store/useEspace";
+import { useEspaceStore } from "@/store/useEspaceStore";
 import type { User } from "@/features/auth/types/auth.types";
 import { IconButton } from "../ui/IconButton";
 import { EspaceToogle } from "../ui/EspaceToogle";
@@ -18,7 +18,7 @@ export const Header = ({onMenuClick, sidebarOpen}: HeaderProps) => {
 
     const isLoading = useAuthStore((state) => state.isLoading);
 
-    const changeEspace = useEspace((state) => state.changeEspace);
+    const changeEspace = useEspaceStore((state) => state.changeEspace);
 
     useEffect(() => {
         if (user?.role) {

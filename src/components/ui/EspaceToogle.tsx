@@ -1,10 +1,10 @@
-import { useEspace } from "@/store/useEspace";
+import { useEspaceStore } from "@/store/useEspaceStore";
 import { Toogle } from "./Toogle"
 
 export const EspaceToogle = () => {
-    const espace = useEspace((state) => state.espace);
+    const espace = useEspaceStore((state) => state.espace);
 
-    const changeEspace = useEspace((state) => state.changeEspace);
+    const changeEspace = useEspaceStore((state) => state.changeEspace);
 
     return (
         <div className="flex h-11 w-56 shrink-0 items-center rounded-xl bg-slate-100 shadow-inner overflow-hidden">

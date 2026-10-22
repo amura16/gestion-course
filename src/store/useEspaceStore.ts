@@ -6,7 +6,7 @@ interface EspaceState {
     changeEspace: (espace: Role) => void;
 }
 
-export const useEspace = create<EspaceState>((set) => ({
+export const useEspaceStore = create<EspaceState>((set) => ({
     espace: "CLIENT",
     changeEspace: (espace) => set({
         espace

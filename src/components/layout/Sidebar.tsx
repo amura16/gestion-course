@@ -3,7 +3,7 @@ import Logo from "../../assets/logo.png";
 import { Button } from "../ui/Button";
 import {LayoutDashboard, Truck, Handshake, History, Package, LogOut, type LucideIcon, Car, Zap, ChevronLeft} from "lucide-react";
 import { useAuthStore } from "@/features/auth/store/useAuthStore";
-import { useEspace } from "@/store/useEspace";
+import { useEspaceStore } from "@/store/useEspaceStore";
 import type { Role } from "@/features/auth/types/auth.types";
 import { EspaceToogle } from "../ui/EspaceToogle";
 
@@ -80,7 +80,7 @@ export const Sidebar = ({onClose}: SidebarProps) => {
         (state) => state.logout
     );
 
-    const espace = useEspace(
+    const espace = useEspaceStore(
         (state) => state.espace
     );
 
