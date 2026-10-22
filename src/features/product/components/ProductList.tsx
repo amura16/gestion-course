@@ -37,19 +37,17 @@ export const ProductList = ({ products, onEdit, onDelete }: ProductListProps) =>
                         <th className="px-5 py-4 font-semibold">Volume</th>
                         <th className="px-5 py-4 font-semibold">Origine</th>
                         <th className="px-5 py-4 font-semibold">Date de création</th>
-                        <th className="px-5 py-4 font-semibold">Dernier mise à jour</th>
                         <th className="px-5 py-4 font-semibold ">Statut</th>
                         <th className="px-5 py-4 text-center font-semibold">Actions</th>
                     </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
                     {products.length > 0 ? products.map((product) => (
-                        <tr key={product.id} className="transition-colors hover:bg-slate-50">
+                        <tr key={product.id} className="transition-colors hover:bg-slate-50 cursor-pointer">
                             <td className="px-5 py-4 font-medium text-slate-800">{product.name}</td>
                             <td className="px-5 py-4 text-slate-600">{product.volume} m³</td>
                             <td className="px-5 py-4 text-slate-600">{product.origin}</td>
                             <td className="px-5 py-4 text-slate-600">{formatDate(product.createdAt)}</td>
-                            <td className="px-5 py-4 text-slate-600">{formatDate(product.updatedAt)}</td>
                             <td className="px-5 py-4">
                                 <span className={`rounded-full px-3 py-1 text-xs font-medium ${statusStyles[product.status]}`}>
                                     {statusLabels[product.status]}
