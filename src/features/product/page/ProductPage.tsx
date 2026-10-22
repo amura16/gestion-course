@@ -17,14 +17,14 @@ const initialProducts: Product[] = [
 ];
 
 export function ProductPage() {
+    const {mutate: createProductMutation, isPending: isCreating} = useCreateProduct();
+    const {mutate: deleteProductMutation, isPending: isDeleting} = useDeleteProduct();
+    const {mutate: updateProductMutation, isPending: isUpdating} = useUpdateProduct();
+
     const [formOpened, setFormOpened] = useState<boolean>(false);
     const [products, ] = useState<Product[]>(initialProducts);
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
     const [productToEdit, setProductToEdit] = useState<Product | null>(null);
-
-    const {mutate: createProductMutation, isPending: isCreating} = useCreateProduct();
-    const {mutate: deleteProductMutation, isPending: isDeleting} = useDeleteProduct();
-    const {mutate: updateProductMutation, isPending: isUpdating} = useUpdateProduct();
 
     const handleEdit = (product: Product) => {
         console.log(product);

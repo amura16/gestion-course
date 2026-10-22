@@ -11,7 +11,7 @@ export const EspaceToogle = () => {
 
             <Toogle
                 content={
-                    <p className="text-center text-[11px] leading-tight">
+                    <p className="text-center text-[11px] leading-tight font-manrope">
                         ESPACE
                         <br />
                         CLIENT
@@ -23,7 +23,7 @@ export const EspaceToogle = () => {
 
             <Toogle
                 content={
-                    <p className="text-center text-[11px] leading-tight">
+                    <p className="text-center text-[11px] leading-tight font-manrope">
                         ESPACE
                         <br />
                         TRANSPORT
