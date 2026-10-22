@@ -45,7 +45,7 @@ export const Header = ({onMenuClick, sidebarOpen}: HeaderProps) => {
             </div>
 
             {/* Search */}
-            <div className="min-w-0 flex-1">
+            <div className="min-w-0 flex-1 ms-2">
                 <div className="mx-auto w-full max-w-xl">
                     <Input
                         leftContent={

@@ -2,12 +2,13 @@ import { useState } from "react";
 import { Outlet } from "react-router";
 import { Sidebar } from "./Sidebar";
 import { Header } from "./Header";
+import Background from "../../assets/background2.avif";
 
 export const MainLayout = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
     return (
-        <div className="min-h-screen bg-slate-50">
+        <div className="min-h-screen">
             {/* Layout desktop */}
             <div className="flex min-h-screen">
                 <div className={`hidden md:block shrink-0 transition-[width] duration-300 ease-in-out ${isSidebarOpen ? "w-65" : "w-0"}`}>
@@ -20,10 +21,22 @@ export const MainLayout = () => {
                 <div className="min-w-0 flex-1">
                     <Header sidebarOpen={isSidebarOpen} onMenuClick={() => setIsSidebarOpen(!isSidebarOpen)} />
 
-                    <main className="min-h-screen pt-16">
-                        <div className="min-h-[calc(100vh-4rem)] p-4 sm:p-5 lg:p-6">
+                    <main className="relative min-h-screen pt-16">
+
+                        {/* Image de fond */}
+                        {/* <div
+                            className="fixed inset-0 -z-10 bg-cover bg-center bg-no-repeat blur-sm"
+                            style={{backgroundImage: `url(${Background})`}}
+                        /> */}
+
+                        {/* Voile blanc */}
+                        <div className="fixed inset-0 -z-10 bg-white/60" />
+
+                        {/* Contenu */}
+                        <div className="relative min-h-[calc(100vh-4rem)] p-4 sm:p-5 lg:p-6">
                             <Outlet />
                         </div>
+
                     </main>
                 </div>
             </div>
