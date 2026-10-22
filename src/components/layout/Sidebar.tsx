@@ -5,7 +5,7 @@ import {LayoutDashboard, Truck, Handshake, History, Package, LogOut, type Lucide
 import { useAuthStore } from "@/features/auth/store/useAuthStore";
 import { useEspace } from "@/store/useEspace";
 import type { Role } from "@/features/auth/types/auth.types";
-import { Toogle } from "../ui/Toogle";
+import { EspaceToogle } from "../ui/EspaceToogle";
 
 type Navigation = {
     path: string;
@@ -97,7 +97,7 @@ export const Sidebar = ({onClose}: SidebarProps) => {
     };
 
     return (
-        <aside className={`fixed left-0 top-0 z-[60] flex h-screen w-full md:w-auto flex-col bg-white shadow-xl md:w-[260px] md:shadow-md`}>
+        <aside className={`fixed left-0 top-0 z-60 flex h-screen w-full md:w-auto flex-col bg-white shadow-xl md:shadow-md`}>
             <div className="flex h-16 shrink-0 items-center justify-between border-b border-slate-100 px-5">
 
                 <div className="flex min-w-0 items-center gap-3">
@@ -208,8 +208,8 @@ export const Sidebar = ({onClose}: SidebarProps) => {
 
                     </nav>
 
-                    <div className="pt-7">
-                        <Toogle content  />
+                    <div className="pt-7 flex justify-center lg:hidden">
+                        <EspaceToogle />
                     </div>
                 </div>
 

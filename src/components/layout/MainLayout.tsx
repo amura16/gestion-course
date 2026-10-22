@@ -30,7 +30,7 @@ export const MainLayout = () => {
 
             {/* Sidebar mobile */}
             <div className={`fixed inset-0 z-50 md:hidden transition-opacity duration-300 ease-in-out ${isSidebarOpen ? "opacity-100" : "pointer-events-none opacity-0"}`}>
-                <div className={`top-16 absolute inset-0 transition-transform duration-300 ease-in-out ${isSidebarOpen ? "translate-y-0" : "-translate-y-full"}`}>
+                <div className={` absolute inset-0 transition-transform duration-300 ease-in-out ${isSidebarOpen ? "translate-y-0" : "-translate-y-full"}`}>
                     <Sidebar onClose={() => setIsSidebarOpen(false)} />
                 </div>
             </div>

@@ -30,7 +30,7 @@ export const ProductList = ({ products, onEdit, onDelete }: ProductListProps) =>
 
     return (
         <div className="w-full overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
-            <table className="w-full min-w-[1000px] text-left text-sm">
+            <table className="w-full min-w-250 text-left text-sm">
                 <thead className="border-b border-slate-200 bg-slate-50 text-slate-600">
                     <tr>
                         <th className="px-5 py-4 font-semibold">Produit</th>

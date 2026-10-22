@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { Input } from "../ui/Input";
-import { Toogle } from "../ui/Toogle";
 import {Search,Bell,Menu, User as UserIcon} from "lucide-react";
 import { useAuthStore } from "@/features/auth/store/useAuthStore";
 import { useEspace } from "@/store/useEspace";
 import type { User } from "@/features/auth/types/auth.types";
 import { IconButton } from "../ui/IconButton";
+import { EspaceToogle } from "../ui/EspaceToogle";
 
 interface HeaderProps {
     onMenuClick: () => void;
@@ -18,8 +18,6 @@ export const Header = ({onMenuClick, sidebarOpen}: HeaderProps) => {
 
     const isLoading = useAuthStore((state) => state.isLoading);
 
-    const espace = useEspace((state) => state.espace);
-
     const changeEspace = useEspace((state) => state.changeEspace);
 
     useEffect(() => {
@@ -29,7 +27,7 @@ export const Header = ({onMenuClick, sidebarOpen}: HeaderProps) => {
     }, [user, changeEspace]);
 
     return (
-        <header className={`fixed right-0 top-0 z-100 flex h-16 items-center gap-3 bg-white px-4 shadow-sm transition-[left,width] duration-300 ${sidebarOpen ? "left-0 md:left-[260px] md:w-[calc(100%-260px)]" : "left-0 w-full"}`}>
+        <header className={`fixed right-0 top-0 z-40 flex h-16 items-center gap-3 bg-white px-4 shadow-sm transition-[left,width] duration-300 ${sidebarOpen ? "left-0 md:left-[245px] md:w-[calc(100%-260px)]" : "left-0 w-full"}`}>
 
             {/* Bouton menu desktop/mobile */}
             {!sidebarOpen && (
@@ -42,32 +40,8 @@ export const Header = ({onMenuClick, sidebarOpen}: HeaderProps) => {
             )}
 
             {/* Espace */}
-            <div className="hidden h-11 w-56 shrink-0 items-center rounded-xl bg-slate-100 p-1 shadow-inner sm:flex">
-
-                <Toogle
-                    content={
-                        <p className="text-center text-[11px] leading-tight">
-                            ESPACE
-                            <br />
-                            CLIENT
-                        </p>
-                    }
-                    isActive={espace === "CLIENT"}
-                    onClick={() => changeEspace("CLIENT")}
-                />
-
-                <Toogle
-                    content={
-                        <p className="text-center text-[11px] leading-tight">
-                            ESPACE
-                            <br />
-                            TRANSPORT
-                        </p>
-                    }
-                    isActive={espace === "CARRIER"}
-                    onClick={() => changeEspace("CARRIER")}
-                />
-
+            <div className="hidden lg:block">
+                <EspaceToogle />
             </div>
 
             {/* Search */}

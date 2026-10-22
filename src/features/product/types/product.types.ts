@@ -1,3 +1,5 @@
+export type ProductStatus = "IN_STOCK" | "SHIPPED" | "DELIVERED";
+
 export type Product = {
     id: number;
     name: string;
@@ -5,7 +7,7 @@ export type Product = {
     origin: string;
     createdAt: string;
     updatedAt: string;
-    status: "IN_STOCK" | "SHIPPED" | "DELIVERED";
+    status: ProductStatus;
 };
 
 export interface CreateProductData {
@@ -15,7 +17,7 @@ export interface CreateProductData {
     largeur: number;
     hauteur: number;
     origine: string;
-    status: string
+    status: ProductStatus;
 }
 
 export interface ProductListProps {
@@ -29,4 +31,10 @@ export interface ProductFormProps {
     onCancel: () => void;
     initialData?: CreateProductData;
     isSubmitting?: boolean;
+};
+
+export interface ProductCardProps {
+    inStock: number;
+    shipped: number;
+    delivered: number;
 };

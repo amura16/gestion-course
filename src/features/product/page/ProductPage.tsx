@@ -33,15 +33,15 @@ export function ProductPage() {
             </div>
             <div className="space-y-6 p-6">
                 <div className="flex gap-5 items-center">
-                    <h1 className="text-2xl font-bold text-slate-800">Liste des produits</h1>
+                    <h1 className="text-2xl font-bold text-slate-800 shrink-0">Liste des produits</h1>
                     <div>
                         <ButtonGlobal 
                             variant="primary"
                             size="medium"
                             content={
-                                <div className="flex gap-4 items-center">
+                                <div className="flex gap-4 md:gap-2 items-center justify-center">
                                     <Plus size={24}/>
-                                    <p className="text-start hidden md:block">Ajouter une nouvelle produit</p>
+                                    <p className="text-start hidden md:block md:text-sm font-manrope">Ajouter une nouvelle produit</p>
                                 </div>
                             }
                             onClick={() => setFormOpened(true)}
