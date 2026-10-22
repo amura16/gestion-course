@@ -12,7 +12,7 @@ export const ConfirmDialog = ({ isOpen, title, message, onConfirm, onCancel }: C
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 px-4 backdrop-blur-sm">
+        <div className="fixed inset-0 z-100 flex items-center justify-center bg-black/40 px-4 backdrop-blur-sm">
             <div className="w-full max-w-md rounded-2xl bg-white shadow-xl">
                 <div className="flex items-start justify-between border-b border-slate-100 px-6 py-5">
                     <div className="flex items-center gap-3">

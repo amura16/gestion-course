@@ -10,8 +10,8 @@ export const MainLayout = () => {
         <div className="min-h-screen bg-slate-50">
             {/* Layout desktop */}
             <div className="flex min-h-screen">
-                <div className={`hidden md:block shrink-0 transition-[width] duration-300 ease-in-out ${isSidebarOpen ? "w-[260px]" : "w-0"}`}>
-                    <div className={`fixed left-0 top-0 h-screen w-[260px] transition-transform duration-300 ease-in-out ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
+                <div className={`hidden md:block shrink-0 transition-[width] duration-300 ease-in-out ${isSidebarOpen ? "w-65" : "w-0"}`}>
+                    <div className={`fixed left-0 top-0 h-screen w-65 transition-transform duration-300 ease-in-out ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
                         <Sidebar onClose={() => setIsSidebarOpen(false)} />
                     </div>
                 </div>

@@ -38,7 +38,7 @@ export const ProductList = ({ products, onEdit, onDelete }: ProductListProps) =>
                         <th className="px-5 py-4 font-semibold">Origine</th>
                         <th className="px-5 py-4 font-semibold">Date de création</th>
                         <th className="px-5 py-4 font-semibold">Dernier mise à jour</th>
-                        <th className="px-5 py-4 font-semibold">Statut</th>
+                        <th className="px-5 py-4 font-semibold ">Statut</th>
                         <th className="px-5 py-4 text-center font-semibold">Actions</th>
                     </tr>
                 </thead>
