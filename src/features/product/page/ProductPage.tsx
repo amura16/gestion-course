@@ -25,10 +25,6 @@ export function ProductPage() {
         console.log("Modifier :", product);
     };
 
-    const handleCreate = () => {
-
-    }
-
     return (
         <div>
             <div className="space-y-6 p-6">
@@ -45,7 +41,7 @@ export function ProductPage() {
                             content={
                                 <div className="flex gap-4 items-center">
                                     <Plus size={24}/>
-                                    <p className="text-start">Ajouter une nouvelle produit</p>
+                                    <p className="text-start hidden md:block">Ajouter une nouvelle produit</p>
                                 </div>
                             }
                             onClick={() => setFormOpened(true)}

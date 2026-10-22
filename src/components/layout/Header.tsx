@@ -29,7 +29,7 @@ export const Header = ({onMenuClick, sidebarOpen}: HeaderProps) => {
     }, [user, changeEspace]);
 
     return (
-        <header className={`fixed right-0 top-0 z-40 flex h-16 items-center gap-3 bg-white px-4 shadow-sm transition-[left,width] duration-300 ${sidebarOpen ? "left-0 md:left-[260px] md:w-[calc(100%-260px)]" : "left-0 w-full"}`}>
+        <header className={`fixed right-0 top-0 z-100 flex h-16 items-center gap-3 bg-white px-4 shadow-sm transition-[left,width] duration-300 ${sidebarOpen ? "left-0 md:left-[260px] md:w-[calc(100%-260px)]" : "left-0 w-full"}`}>
 
             {/* Bouton menu desktop/mobile */}
             {!sidebarOpen && (

@@ -5,6 +5,7 @@ import {LayoutDashboard, Truck, Handshake, History, Package, LogOut, type Lucide
 import { useAuthStore } from "@/features/auth/store/useAuthStore";
 import { useEspace } from "@/store/useEspace";
 import type { Role } from "@/features/auth/types/auth.types";
+import { Toogle } from "../ui/Toogle";
 
 type Navigation = {
     path: string;
@@ -13,7 +14,6 @@ type Navigation = {
 };
 
 type SidebarProps = {
-    isOpen: boolean;
     onClose: () => void;
 };
 
@@ -72,7 +72,7 @@ const navigations: Record<Role, Navigation[]> = {
     ADMIN: [],
 };
 
-export const Sidebar = ({isOpen, onClose}: SidebarProps) => {
+export const Sidebar = ({onClose}: SidebarProps) => {
 
     const navigate = useNavigate();
 
@@ -97,7 +97,7 @@ export const Sidebar = ({isOpen, onClose}: SidebarProps) => {
     };
 
     return (
-        <aside className={`fixed left-0 top-0 z-[60] flex h-screen w-full md:w-auto flex-col bg-white shadow-xl transition-transform duration-300 ease-in-out md:w-[260px] md:shadow-md ${isOpen ? "translate-y-0 md:translate-x-0" : "-translate-y-full md:-translate-x-full"}`}>
+        <aside className={`fixed left-0 top-0 z-[60] flex h-screen w-full md:w-auto flex-col bg-white shadow-xl md:w-[260px] md:shadow-md`}>
             <div className="flex h-16 shrink-0 items-center justify-between border-b border-slate-100 px-5">
 
                 <div className="flex min-w-0 items-center gap-3">
@@ -207,6 +207,10 @@ export const Sidebar = ({isOpen, onClose}: SidebarProps) => {
                         })}
 
                     </nav>
+
+                    <div className="pt-7">
+                        <Toogle content  />
+                    </div>
                 </div>
 
                 {/* Déconnexion */}

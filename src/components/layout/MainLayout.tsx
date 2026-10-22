@@ -12,7 +12,7 @@ export const MainLayout = () => {
             <div className="flex min-h-screen">
                 <div className={`hidden md:block shrink-0 transition-[width] duration-300 ease-in-out ${isSidebarOpen ? "w-[260px]" : "w-0"}`}>
                     <div className={`fixed left-0 top-0 h-screen w-[260px] transition-transform duration-300 ease-in-out ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
-                        <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+                        <Sidebar onClose={() => setIsSidebarOpen(false)} />
                     </div>
                 </div>
 
@@ -29,10 +29,12 @@ export const MainLayout = () => {
             </div>
 
             {/* Sidebar mobile */}
-            <div className="md:hidden">
-                {isSidebarOpen && <div className="fixed inset-0 z-50 bg-slate-900/30 backdrop-blur-[2px]" onClick={() => setIsSidebarOpen(false)} />}
-                <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+            <div className={`fixed inset-0 z-50 md:hidden transition-opacity duration-300 ease-in-out ${isSidebarOpen ? "opacity-100" : "pointer-events-none opacity-0"}`}>
+                <div className={`top-16 absolute inset-0 transition-transform duration-300 ease-in-out ${isSidebarOpen ? "translate-y-0" : "-translate-y-full"}`}>
+                    <Sidebar onClose={() => setIsSidebarOpen(false)} />
+                </div>
             </div>
+
         </div>
     );
 };
