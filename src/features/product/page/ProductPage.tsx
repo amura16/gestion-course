@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { ProductCard } from "../components/ProductCard";
@@ -9,22 +9,27 @@ import { useDeleteProduct } from "../hooks/useDeleteProduct";
 import { useCreateProduct } from "../hooks/useCreateProduct";
 import { ProductDetailsModal } from "../components/ProductDetailsModal";
 import { useUpdateProduct } from "../hooks/useUpdateProduct";
-
-const initialProducts: Product[] = [
-    { id: 1, description: "Riz",longueur: 20, largeur: 5, hauteur: 4, volume: 25,poids: 5, origine: "Antananarivo", createdAt: "2026-10-01", updatedAt: "2026-10-15", status: "IN_STOCK" },
-    { id: 2, description: "Vanille",longueur: 20, largeur: 5, hauteur: 4, volume: 10,poids: 5, origine: "Sambava", createdAt: "2026-10-05", updatedAt: "2026-10-18", status: "SHIPPED" },
-    { id: 3, description: "Café",longueur: 20, largeur: 5, hauteur: 4, volume: 15,poids: 5, origine: "Fianarantsoa", createdAt: "2026-10-08", updatedAt: "2026-10-20", status: "DELIVERED" },
-];
+import { useGetProduct } from "../hooks/useGetProduct";
 
 export function ProductPage() {
+    const {data, isPending: isLoading, isError} = useGetProduct();
+
+    if (isError) {
+        console.log(isError);
+    }
+
+    const products = data ?? []
+
     const {mutate: createProductMutation, isPending: isCreating} = useCreateProduct();
     const {mutate: deleteProductMutation, isPending: isDeleting} = useDeleteProduct();
     const {mutate: updateProductMutation, isPending: isUpdating} = useUpdateProduct();
 
     const [formOpened, setFormOpened] = useState<boolean>(false);
-    const [products, ] = useState<Product[]>(initialProducts);
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
     const [productToEdit, setProductToEdit] = useState<Product | null>(null);
+    const [inStockCount, setInStockCount] = useState<number>(0);
+    const [shippedCount, setShippedCount] = useState<number>(0);
+    const [deliveredCount, setDeliveredCount] = useState<number>(0);
 
     const handleEdit = (product: Product) => {
         console.log(product);
@@ -51,11 +56,23 @@ export function ProductPage() {
         setSelectedProduct(product);
     };
 
+    useEffect(() => {
+        setInStockCount(() => products.filter((product) => product.status === "IN_STOCK").length);
+        setShippedCount(() => products.filter((product) => product.status === "SHIPPED").length);
+        setDeliveredCount(() => products.filter((product) => product.status === "DELIVERED").length);
+    }, [products]);
+
+    useEffect(()=> {
+        if (!isCreating || !isUpdating) {
+            setFormOpened(false);
+        }
+    }, [isCreating, isUpdating])
+
     return (
         <div>
             <div className="space-y-6 p-6">
                 <h1 className="text-2xl font-bold text-slate-800">Gestion des produits</h1>
-                <ProductCard inStock={1} shipped={1} delivered={1} />
+                <ProductCard inStock={inStockCount} shipped={shippedCount} delivered={deliveredCount} />
             </div>
             <div className="space-y-6 p-6">
                 <div className="flex gap-5 items-center">
@@ -94,7 +111,7 @@ export function ProductPage() {
                         onDelete={deleteProductMutation}
                     />
                 )}
-                <ProductList products={products} onEdit={handleEdit} onDelete={deleteProductMutation} onView={handleView} isPending={isDeleting}/>
+                <ProductList products={products} isLoading={isLoading} onEdit={handleEdit} onDelete={deleteProductMutation} onView={handleView} isPending={isDeleting}/>
             </div>
         </div>
     );

@@ -1,7 +1,7 @@
 import { NavLink, useNavigate } from "react-router";
 import Logo from "../../assets/logo.png";
 import { Button } from "../ui/Button";
-import {LayoutDashboard, Truck, Handshake, History, Package, LogOut, type LucideIcon, Car, Zap, ChevronLeft} from "lucide-react";
+import {LayoutDashboard, Truck, Handshake, History, Package, LogOut, type LucideIcon, Car, Zap, ChevronLeft, X} from "lucide-react";
 import { useAuthStore } from "@/features/auth/store/useAuthStore";
 import { useEspaceStore } from "@/store/useEspaceStore";
 import type { Role } from "@/features/auth/types/auth.types";
@@ -117,9 +117,18 @@ export const Sidebar = ({onClose}: SidebarProps) => {
                     type="button"
                     onClick={onClose}
                     aria-label="Fermer le menu"
-                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-slate-500 transition-all duration-200 hover:bg-slate-100 hover:text-slate-900 active:scale-95"
+                    className="hidden md:flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-slate-500 transition-all duration-200 hover:bg-slate-100 hover:text-slate-900 active:scale-95"
                 >
                     <ChevronLeft size={20} />
+                </button>
+                {/* Pour mobile */}
+                <button
+                    type="button"
+                    onClick={onClose}
+                    aria-label="Fermer le menu"
+                    className="flex md:hidden h-9 w-9 shrink-0 items-center justify-center rounded-lg text-slate-500 transition-all duration-200 hover:bg-slate-100 hover:text-slate-900 active:scale-95"
+                >
+                    <X size={20} />
                 </button>
 
             </div>

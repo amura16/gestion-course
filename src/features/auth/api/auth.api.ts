@@ -8,7 +8,7 @@ import type {
 
 export const login = async (credentials: LoginCredentials): Promise<User> => {
     const response = await api.post<LoginResponse>(
-        "/user/login",
+        "/login",
         credentials,
     );
 

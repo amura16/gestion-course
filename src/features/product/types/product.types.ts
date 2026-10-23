@@ -41,6 +41,7 @@ export type UpdateProductData = CreateProductData & {id: number}
 export interface ProductListProps {
     products: Product[];
     isPending: boolean;
+    isLoading: boolean;
     onEdit: (product: Product) => void;
     onDelete: (id: number) => void;
     onView: (product: Product) => void;

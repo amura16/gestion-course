@@ -63,18 +63,18 @@ export const Header = ({onMenuClick, sidebarOpen}: HeaderProps) => {
             <IconButton icon={Bell} label="Notifications" showIndicator />
 
             {/* Utilisateur */}
-            <div className="hidden h-10 max-w-40 shrink-0 items-center rounded-xl border border-slate-200 bg-white px-4 text-sm font-semibold text-slate-700 shadow-sm md:flex">
+            <div className="h-10 max-w-40 shrink-0 items-center rounded-xl border border-slate-200 bg-white px-4 text-sm font-semibold text-slate-700 shadow-sm flex">
                 <span className="truncate">
                     {isLoading
                         ? "Chargement..."
                         : (
                             user?.nom ? 
                             <div className="flex justify-center items-center gap-2">
-                                user.nom 
+                                <p className="hidden md:flex">{user.nom}</p> 
                                 <UserIcon size={20}/>     
                             </div> : 
                             <div className="flex justify-center items-center gap-2">
-                                Non connecté
+                                <p className="hidden md:flex">Non connecté</p>
                                 <UserIcon size={20}/>     
                             </div>
                         )

@@ -1,10 +1,19 @@
-import { useState } from "react";
-import { Outlet } from "react-router";
+import { useEffect, useState } from "react";
+import { Outlet, useNavigate } from "react-router";
 import { Sidebar } from "./Sidebar";
 import { Header } from "./Header";
+import { useAuthStore } from "@/features/auth/store/useAuthStore";
 
 export const MainLayout = () => {
+    const navigate = useNavigate();
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+    const user = useAuthStore((state) => state.user);
+
+    useEffect(() => {
+        if (!user) {
+            navigate("/login");            
+        }
+    }, [user])
 
     return (
         <div className="min-h-screen">

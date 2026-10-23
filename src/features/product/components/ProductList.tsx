@@ -2,10 +2,11 @@ import { Pencil, Trash2 } from "lucide-react";
 import { statusLabels, statusStyles, type Product, type ProductListProps } from "../types/product.types";
 import { useEffect, useState } from "react";
 import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
+import { Loader } from "@/components/ui/Loader";
 
 const formatDate = (date: string) => new Intl.DateTimeFormat("fr-FR", { dateStyle: "short" }).format(new Date(date));
 
-export const ProductList = ({ products, onEdit, onDelete, onView, isPending }: ProductListProps) => {
+export const ProductList = ({ products, onEdit, onDelete, onView, isPending, isLoading }: ProductListProps) => {
     const [productToDelete, setProductToDelete] = useState<Product | null>(null);
 
     const handleDelete = () => {
@@ -54,7 +55,13 @@ export const ProductList = ({ products, onEdit, onDelete, onView, isPending }: P
                 </thead>
 
                 <tbody className="divide-y divide-slate-100">
-                    {products.length > 0 ? (
+                    {isLoading ? (
+                        <tr>
+                            <td colSpan={6} className="px-5 py-4">
+                                <Loader />
+                            </td>
+                        </tr>
+                    ) :products.length > 0 ? (
                         products.map((product) => (
                             <tr
                                 key={product.id}
@@ -67,7 +74,7 @@ export const ProductList = ({ products, onEdit, onDelete, onView, isPending }: P
 
                                 {/* Volume */}
                                 <td className="px-3 py-4 text-slate-600 sm:px-5">
-                                    {product.volume} m³
+                                    {product.volume} cm³
                                 </td>
 
                                 {/* Origine : desktop uniquement */}
@@ -83,7 +90,7 @@ export const ProductList = ({ products, onEdit, onDelete, onView, isPending }: P
                                 {/* Statut */}
                                 <td className="px-3 py-4 sm:px-5">
                                     <span
-                                        className={`rounded-full px-2 py-1 text-xs font-medium sm:px-3 ${statusStyles[product.status]}`}
+                                        className={`whitespace-nowrap rounded-full px-2 py-1 text-xs font-medium sm:px-3 ${statusStyles[product.status]}`}
                                     >
                                         {statusLabels[product.status]}
                                     </span>

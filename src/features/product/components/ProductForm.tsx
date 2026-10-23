@@ -3,16 +3,30 @@ import { Package, Ruler, Weight, X } from "lucide-react";
 import type { CreateProductData, ProductFormProps } from "../types/product.types";
 
 export const ProductForm = ({onSubmit, onCancel, initialData, isSubmitting = false}: ProductFormProps) => {
-    const {register,handleSubmit, formState: { errors }} = useForm<CreateProductData>({
-        defaultValues: initialData ?? {
+    const emptyProduct = {
             description: "",
             poids: 0,
             longueur: 0,
             largeur: 0,
             hauteur: 0,
             origine: "",
-        },
+    };
+
+    const {register,handleSubmit, reset, formState: { errors }} = useForm<CreateProductData>({
+        defaultValues: initialData ?? emptyProduct 
     });
+
+    const handleFormSubmit = (data: CreateProductData) => {
+        onSubmit(data);
+
+        reset(emptyProduct);
+    };
+
+    const dimensions = [
+        { id: "longueur", label: "Longueur" },
+        { id: "largeur", label: "Largeur" },
+        { id: "hauteur", label: "Hauteur" }
+    ] as const;
 
     const inputClass = "mt-2 w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-800 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100 placeholder:text-slate-400";
 
@@ -24,7 +38,7 @@ export const ProductForm = ({onSubmit, onCancel, initialData, isSubmitting = fal
             onClick={onCancel}
         >
             <form
-                onSubmit={handleSubmit(onSubmit)}
+                onSubmit={handleSubmit(handleFormSubmit)}
                 onClick={(event) => event.stopPropagation()}
                 className="flex max-h-[90vh] w-full max-w-2xl flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xl animate-slide-down"
             >
@@ -186,22 +200,7 @@ export const ProductForm = ({onSubmit, onCancel, initialData, isSubmitting = fal
                             </div>
 
                             <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-                                {(
-                                    [
-                                        {
-                                            id: "longueur",
-                                            label: "Longueur",
-                                        },
-                                        {
-                                            id: "largeur",
-                                            label: "Largeur",
-                                        },
-                                        {
-                                            id: "hauteur",
-                                            label: "Hauteur",
-                                        },
-                                    ] as const
-                                ).map(({ id, label }) => (
+                                {dimensions.map(({ id, label }) => (
                                     <div key={id}>
                                         <label
                                             htmlFor={id}
