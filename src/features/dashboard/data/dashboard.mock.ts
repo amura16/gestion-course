@@ -1,9 +1,9 @@
 import type { DashboardSummary } from "../types/dashboard.types";
 
 export const dashboardStats: DashboardSummary = {
-    pendingShipments: 5,
-    ongoingShipments: 3,
-    completedShipments: 12,
+    pendingShipments: 4,
+    ongoingShipments: 4,
+    completedShipments: 4,
     pendingOffers: 8,
     totalOngoingAmount: 1_500_000,
     remainingAmount: 2_350_000,

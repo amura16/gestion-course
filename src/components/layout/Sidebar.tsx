@@ -90,7 +90,7 @@ export const Sidebar = ({onClose}: SidebarProps) => {
         ADMIN: "admin",
     };
 
-    const logoutClick = async () => {
+    const logoutClick = () => {
         logout();
         navigate("/login");
         onClose();

@@ -24,5 +24,5 @@ export const getCurrentUser = async () : Promise<User> =>  {
 }
 
 export const logout = async () : Promise<void> => {
-    await api.get("/user/logout");
+    await api.post("/logout");
 }
