@@ -6,6 +6,7 @@ import {
 import { LoginPage } from "@/features/auth/pages/LoginPage";
 import { ProductPage } from "@/features/product/page/ProductPage";
 import { MainLayout } from "@/components/layout/MainLayout";
+import { DashboardPage } from "@/features/dashboard/page/DashboardPage";
 
 export const router = createBrowserRouter([
     {
@@ -26,12 +27,11 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: "produit",
-                children: [
-                    {
-                        index: true,
-                        Component: ProductPage
-                    }
-                ]
+                Component: ProductPage
+            },
+            {
+                path: "dashboard",
+                Component: DashboardPage
             }
         ]
     }

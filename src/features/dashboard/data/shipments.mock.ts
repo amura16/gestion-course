@@ -1,0 +1,41 @@
+import type { Shipment } from "@/features/shipment/types/shipment.types";
+
+
+export const mockShipments: Shipment[] = [
+    {
+        id: "1",
+        reference: "SHP-2026-001",
+        origin: "Antananarivo",
+        destination: "Toamasina",
+        carrier: "Rakoto Transport",
+        status: "ASSIGNED",
+        progress: 65,
+        estimatedArrival: "Demain à 14:00",
+        amount: 850000,
+        createdAt: "2026-10-20",
+    },
+    {
+        id: "2",
+        reference: "SHP-2026-002",
+        origin: "Antsirabe",
+        destination: "Antananarivo",
+        carrier: "Express Mada",
+        status: "ASSIGNED",
+        progress: 35,
+        estimatedArrival: "Demain à 10:00",
+        amount: 320000,
+        createdAt: "2026-10-21",
+    },
+    {
+        id: "3",
+        reference: "SHP-2026-003",
+        origin: "Mahajanga",
+        destination: "Antananarivo",
+        carrier: "Mada Logistics",
+        status: "ASSIGNED",
+        progress: 80,
+        estimatedArrival: "Aujourd'hui à 18:00",
+        amount: 620000,
+        createdAt: "2026-10-19",
+    },
+];

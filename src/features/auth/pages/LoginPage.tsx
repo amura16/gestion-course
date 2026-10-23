@@ -14,7 +14,7 @@ export function LoginPage() {
     }
 
     if (isAuthenticated) {
-        return <Navigate to="/client/produit" replace />;
+        return <Navigate to="/client/dashboard" replace />;
     }
 
     return (

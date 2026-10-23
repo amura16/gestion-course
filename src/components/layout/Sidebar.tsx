@@ -20,7 +20,7 @@ type SidebarProps = {
 const navigations: Record<Role, Navigation[]> = {
     CLIENT: [
         {
-            path: "ensemble",
+            path: "dashboard",
             name: "Vue d'ensemble",
             icon: LayoutDashboard,
         },
