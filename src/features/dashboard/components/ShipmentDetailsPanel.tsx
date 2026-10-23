@@ -37,7 +37,7 @@ export const ShipmentDetailsPanel = ({
                     type="button"
                     onClick={onClose}
                     aria-label="Fermer les détails"
-                    className="rounded-lg p-2 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-800"
+                    className="rounded-lg p-2 text-slate-500 hidden md:block transition-colors hover:bg-slate-100 hover:text-slate-800"
                 >
                     <X size={18} />
                 </button>

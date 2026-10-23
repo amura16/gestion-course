@@ -21,7 +21,7 @@ const navigations: Record<Role, Navigation[]> = {
     CLIENT: [
         {
             path: "dashboard",
-            name: "Vue d'ensemble",
+            name: "Tableau de bord",
             icon: LayoutDashboard,
         },
         {
@@ -48,9 +48,9 @@ const navigations: Record<Role, Navigation[]> = {
 
     CARRIER: [
         {
-            path: "ensemble",
-            name: "Vue d'ensemble",
-            icon: Package,
+            path: "dashboard",
+            name: "Tableau de bord",
+            icon: LayoutDashboard,
         },
         {
             path: "vehicule",
@@ -150,7 +150,7 @@ export const Sidebar = ({onClose}: SidebarProps) => {
                                 />
 
                                 <span className="font-semibold">
-                                    Nouvelle demande
+                                    Nouvelle Course
                                 </span>
                             </div>
                         }

@@ -6,7 +6,7 @@ export const ShipmentTrackingCard = ({shipment, selected, onClick}: ShipmentTrac
         <button
             type="button"
             onClick={onClick}
-            className={`w-full rounded-xl border p-4 text-left transition-colors ${
+            className={`w-full min-w-0 rounded-xl border p-4 text-left transition-colors ${
                 selected
                     ? "border-blue-500 bg-blue-50/50"
                     : "border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50"

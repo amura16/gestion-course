@@ -38,4 +38,16 @@ export const mockShipments: Shipment[] = [
         amount: 620000,
         createdAt: "2026-10-19",
     },
+    {
+        id: "4",
+        reference: "SHP-2026-003",
+        origin: "Mahajanga",
+        destination: "Antananarivo",
+        carrier: "Mada Logistics",
+        status: "ASSIGNED",
+        progress: 80,
+        estimatedArrival: "Aujourd'hui à 18:00",
+        amount: 620000,
+        createdAt: "2026-10-19",
+    },
 ];
